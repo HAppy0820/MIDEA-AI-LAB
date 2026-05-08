@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:24px 32px;">
+  <style>
+    .btn { font-family:var(--font-sans); font-size:14px; font-weight:500; line-height:1; border-radius:8px; padding:11px 18px; border:1px solid transparent; cursor:pointer; transition:all 220ms cubic-bezier(0.22,0.61,0.36,1); display:inline-flex; align-items:center; gap:8px; letter-spacing:-0.005em;}
+    .btn-primary { background:var(--coral-500); color:var(--canvas); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 2px rgba(45,40,30,0.08); }
+    .btn-primary:hover { background:var(--coral-600); }
+    .btn-secondary { background:var(--canvas); color:var(--ink-800); border-color:var(--border); }
+    .btn-secondary:hover { background:var(--canvas-soft); border-color:var(--border-strong);}
+    .btn-ghost { background:transparent; color:var(--ink-700); }
+    .btn-ghost:hover { background:var(--ink-200); }
+    .btn-link { background:transparent; color:var(--coral-600); padding:11px 4px; }
+    .btn-link:hover { color:var(--coral-700); }
+    .btn-disabled { background:var(--canvas-soft); color:var(--ink-400); border-color:var(--border-faint); cursor:not-allowed; }
+    .btn-sm { padding:7px 12px; font-size:13px; border-radius:6px; }
+  </style>
+  <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+    <button class="btn btn-primary">Start chatting</button>
+    <button class="btn btn-secondary">Learn more</button>
+    <button class="btn btn-ghost">Cancel</button>
+    <button class="btn btn-link">View docs →</button>
+    <button class="btn btn-disabled" disabled>Disabled</button>
+  </div>
+  <div style="display:flex; gap:10px; align-items:center; margin-top:14px;">
+    <button class="btn btn-primary btn-sm">Small primary</button>
+    <button class="btn btn-secondary btn-sm">Small secondary</button>
+  </div>
+  <p style="font-family:var(--font-sans);font-size:12px;color:var(--ink-500);margin:14px 0 0;">
+    Sentence case. Coral primary, hairline secondary, no shadow at rest.
+  </p>
+</body></html>

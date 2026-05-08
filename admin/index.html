@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Midea AI Lab · 后台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<!-- Login screen -->
+<div id="login-screen" class="login" style="display:none;">
+  <div class="login-card">
+    <div class="brand"><div class="mark">M</div><div class="name">Midea AI Lab · 后台</div></div>
+    <div class="login-sub">管理员登录</div>
+    <div id="login-set" style="display:none;">
+      <p style="font-size:13px;color:var(--ink-600);margin-bottom:18px;line-height:1.6;">
+        首次进入。请<strong>设置一个登录密码</strong>——只存在你这台电脑的浏览器里，不会上传。
+      </p>
+      <div class="field">
+        <label class="field-label">设置密码</label>
+        <input type="password" id="set-pw1" class="input" placeholder="至少 6 位" />
+      </div>
+      <div class="field">
+        <label class="field-label">再输一次</label>
+        <input type="password" id="set-pw2" class="input" />
+      </div>
+      <button class="btn primary" id="btn-set-pw" style="width:100%;justify-content:center;">设置并进入</button>
+    </div>
+    <div id="login-enter" style="display:none;">
+      <div class="field">
+        <label class="field-label">密码</label>
+        <input type="password" id="enter-pw" class="input" placeholder="输入登录密码" />
+      </div>
+      <button class="btn primary" id="btn-enter" style="width:100%;justify-content:center;">进入后台</button>
+      <button class="btn ghost small" id="btn-reset-pw" style="width:100%;justify-content:center;margin-top:10px;">忘记密码？重置（会清空本机配置）</button>
+    </div>
+  </div>
+</div>
+
+<!-- App -->
+<div id="app" class="app" style="display:none;">
+  <aside class="sidebar">
+    <div class="brand"><div class="mark">M</div><div class="name">AI Lab · 后台</div></div>
+
+    <div class="nav-item" data-tab="weekly">
+      <span class="nav-num">02</span>
+      <span>每周大事件</span>
+    </div>
+    <div class="nav-item" data-tab="essays">
+      <span class="nav-num">03</span>
+      <span>电商思考</span>
+    </div>
+    <div class="nav-item" data-tab="timeline">
+      <span class="nav-num">01</span>
+      <span>时间树</span>
+    </div>
+    <div class="nav-item" data-tab="settings">
+      <span class="nav-num">⚙</span>
+      <span>设置</span>
+    </div>
+
+    <div class="nav-spacer"></div>
+
+    <div class="nav-foot" id="status-foot">
+      <div>GitHub: <span id="st-gh" class="warn">未配置</span></div>
+      <div>DeepSeek: <span id="st-ds" class="warn">未配置</span></div>
+      <div>未保存改动: <span id="st-dirty">0</span></div>
+    </div>
+    <button class="btn ghost small" id="btn-logout" style="margin-top:8px;">退出登录</button>
+  </aside>
+
+  <main class="main" id="main"></main>
+</div>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

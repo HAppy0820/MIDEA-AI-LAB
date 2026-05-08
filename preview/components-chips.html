@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="padding:24px 32px;">
+  <style>
+    .chip { display:inline-flex; align-items:center; gap:6px; font-family:var(--font-sans); font-size:12px; font-weight:500; padding:5px 11px; border-radius:999px; border:1px solid var(--border); color:var(--ink-700); background:var(--canvas);}
+    .chip:hover { background:var(--canvas-soft);}
+    .chip--coral { background:var(--coral-50); color:var(--coral-700); border-color:transparent;}
+    .chip--ink   { background:var(--ink-800); color:var(--canvas); border-color:transparent;}
+    .chip--success { background:#e8f0e3; color:#3d5b34; border-color:transparent;}
+    .chip--warning { background:#f8ecd6; color:#7a5a1f; border-color:transparent;}
+    .chip--danger  { background:#f4dbd6; color:#7a2c20; border-color:transparent;}
+    .dot { width:6px; height:6px; border-radius:99px; background:currentColor;}
+  </style>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <span class="chip">All</span>
+    <span class="chip">Research</span>
+    <span class="chip">Weekly</span>
+    <span class="chip">Commerce</span>
+    <span class="chip chip--coral">Featured</span>
+    <span class="chip chip--ink">Live</span>
+  </div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
+    <span class="chip chip--success"><span class="dot"></span>Stable</span>
+    <span class="chip chip--warning"><span class="dot"></span>Beta</span>
+    <span class="chip chip--danger"><span class="dot"></span>Deprecated</span>
+    <span class="chip" style="font-family:var(--font-mono);font-size:11px;">v3.1</span>
+    <span class="chip">+12 more</span>
+  </div>
+</body></html>
