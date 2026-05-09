@@ -627,21 +627,78 @@ window.WEEKLY_ARCHIVE = [
     weekOf: '2026 · 第 18 周 · 4 月 27 日 — 5 月 3 日',
     summary: 'GPT-5 Turbo 公测、Hugging Face 开源 Sora 复刻、白宫 AI 行动报告',
     events: [
-      { kind:'模型升级', title:'OpenAI GPT-5 Turbo 进入公测', glyph:'pulse',
-        teaser:'API 价格下调 40%，新增 1M 上下文与原生工具调用 v2 协议。',
-        body:['GPT-5 Turbo 是 GPT-5 上线四个月后的首次大幅降本版本。','• 上下文 1M tokens（输入），输出仍上限 32K。','• 工具调用协议升级到 v2，结构化 JSON 失败率下降 60%。','• 价格：输入 $1.25/M、输出 $10/M。','• 限速：免费层每分钟 10 次，Plus 100 次。','对中小卖家影响：1M 上下文意味着可以一次塞进整个店铺三年的客服对话来做"为什么客户不下单"的归因分析。'] },
-      { kind:'开源项目', title:'Hugging Face 开源 Sora 复刻：OpenSora-2', glyph:'branch',
-        teaser:'13B 参数视频生成模型完整开放权重，4 秒 1080p 在 RTX 4090 上 8 分钟出片。',
-        body:['OpenSora-2 是 HF 与 OpenBMB 联合训练的开源视频模型。','• Apache 2.0 协议，权重 + 训练代码全部公开。','• 在 VBench 上得分 82.4，接近 Sora 早期版本。','• 推理在单张 4090 上可跑 4 秒 1080p 视频，约 8 分钟。','对跨境卖家：商品短视频从"找代运营拍"开始变成"产品图 + prompt → 视频"。但当前画质仍不如真人拍摄。'] },
-      { kind:'新概念', title:'Hierarchical Memory for Long-running Agents', glyph:'spark',
-        teaser:'DeepMind 提出 Agent 长期记忆的三层架构：工作记忆、情景记忆、语义记忆。',
-        body:['DeepMind 论文《H-Mem》提出 Agent 长跑时的记忆分层方案：','• Working memory：当前任务上下文（数千 tokens）。','• Episodic memory：过去执行过的具体任务（向量库）。','• Semantic memory：从大量执行中提炼的"经验法则"。','在 BrowseComp 长任务上，分层记忆让 Agent 完成率从 28% 提升到 47%。','应用：电商 Agent 跑了一个月之后才知道"周二早上 9 点上新转化率最高"——这种经验需要语义记忆来沉淀。'] },
-      { kind:'政策', title:'白宫发布《2026 AI Action Report》', glyph:'shield',
-        teaser:'强调本土供应链、关键基础设施 AI 安全审查，对中国出口的 AI 模型不在限制范围。',
-        body:['白宫 OSTP 在 4 月 30 日发布年度 AI 行动报告：','• 本土 GPU 制造、能源、训练数据安全列为第一优先级。','• 关键基础设施（电网、医疗）部署的 AI 系统须通过 NIST 红队测试。','• 对外贸易：对中国 AI 模型的进口（含中国研发的 SaaS 产品）暂不限制；但中国企业在美训练高算力模型仍受 BIS 出口管制。','跨境电商角度：对面向美国市场的中国 AI 工具（包括跨境 SaaS、AI 客服）当前没有直接合规风险。'] },
-      { kind:'公司动态', title:'Anthropic 招聘"Agent 安全研究员"扩编 80%', glyph:'box',
-        teaser:'Anthropic 宣布将 Agent 安全团队从 25 人扩到 45 人，重点关注代理用户操作的对抗性测试。',
-        body:['Anthropic 在 5 月 1 日的官方博客披露：','• Agent 安全团队（Agentic Misuse & Reliability）从 25 扩到 45 人。','• 招募方向：渗透测试、对抗性 prompt、社会工程学背景。','• 同时启动 "Bug Bounty for Agents"——找出 Claude 在代用户操作中被诱导的方式，最高奖金 $50k。','信号：头部厂商开始把"代理被骗"当成核心风险，而不是边角料。预示未来 Agent 部署的合规门槛会快速抬升。'] },
+      {
+        kind: '模型升级',
+        title: 'OpenAI GPT-5 Turbo 进入公测',
+        glyph: 'pulse',
+        teaser: 'API 价格下调 40%，新增 1M 上下文与原生工具调用 v2 协议。',
+        body: [
+          'GPT-5 Turbo 是 GPT-5 上线四个月后的首次大幅降本版本。',
+          '• 上下文 1M tokens（输入），输出仍上限 32K。',
+          '• 工具调用协议升级到 v2，结构化 JSON 失败率下降 60%。',
+          '• 价格：输入 $1.25/M、输出 $10/M。',
+          '• 限速：免费层每分钟 10 次，Plus 100 次。',
+          '对中小卖家影响：1M 上下文意味着可以一次塞进整个店铺三年的客服对话来做"为什么客户不下单"的归因分析。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="20" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">OPENAI GPT-5 TURBO</text>\n  \n  <!-- 上下文长度焦点：1M 输入条 -->\n  <rect x="40" y="50" width="420" height="80" rx="6" fill="#cc785c" opacity="0.14"/>\n  \n  <!-- 1M 数字焦点 -->\n  <text x="250" y="82" font-family="Noto Serif SC, serif" font-size="36" fill="#3d3729" text-anchor="middle" font-weight="bold">1M</text>\n  <text x="250" y="106" font-family="Source Code Pro, monospace" font-size="10" fill="#7a7363" text-anchor="middle" letter-spacing="2">TOKENS 上下文输入</text>\n  \n  <!-- 价格下调 40% 的视觉条 -->\n  <rect x="40" y="150" width="180" height="28" rx="4" fill="#3d3729" opacity="0.08"/>\n  <text x="130" y="169" font-family="Source Code Pro, monospace" font-size="11" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">输入 $1.25/M</text>\n  \n  <rect x="240" y="150" width="180" height="28" rx="4" fill="#3d3729" opacity="0.08"/>\n  <text x="330" y="169" font-family="Source Code Pro, monospace" font-size="11" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">输出 $10/M</text>\n  \n  <!-- 降价标签 -->\n  <rect x="310" y="44" width="80" height="20" rx="10" fill="none" stroke="#cc785c" stroke-width="1.2"/>\n  <text x="350" y="58" font-family="Source Code Pro, monospace" font-size="9" fill="#cc785c" text-anchor="middle" letter-spacing="1.5">-40% 价格</text>\n  \n  <!-- 工具调用失败率下降 -->\n  <rect x="40" y="190" width="200" height="22" rx="4" fill="#3d3729" opacity="0.06"/>\n  <text x="140" y="205" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">工具调用 v2 · 失败率 -60%</text>\n  \n  <!-- 底部事实 -->\n  <text x="250" y="232" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729" text-anchor="middle">GPT-5 上线四个月后首次大幅降本版本</text>\n</svg>',
+      },
+      {
+        kind: '开源项目',
+        title: 'Hugging Face 开源 Sora 复刻：OpenSora-2',
+        glyph: 'branch',
+        teaser: '13B 参数视频生成模型完整开放权重，4 秒 1080p 在 RTX 4090 上 8 分钟出片。',
+        body: [
+          'OpenSora-2 是 HF 与 OpenBMB 联合训练的开源视频模型。',
+          '• Apache 2.0 协议，权重 + 训练代码全部公开。',
+          '• 在 VBench 上得分 82.4，接近 Sora 早期版本。',
+          '• 推理在单张 4090 上可跑 4 秒 1080p 视频，约 8 分钟。',
+          '对跨境卖家：商品短视频从"找代运营拍"开始变成"产品图 + prompt → 视频"。但当前画质仍不如真人拍摄。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="22" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">OPEN SOURCE</text>\n  <text x="16" y="40" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">HUGGING FACE × OPENBMB</text>\n\n  <!-- 核心数字焦点：82.4 VBench 分数 -->\n  <text x="250" y="95" font-family="Noto Serif SC, serif" font-size="56" fill="#cc785c" text-anchor="middle" font-weight="700">82.4</text>\n  <text x="250" y="118" font-family="Source Code Pro, monospace" font-size="10" fill="#7a7363" text-anchor="middle" letter-spacing="2">VBENCH SCORE</text>\n\n  <!-- 对比线：Sora 早期版本 -->\n  <line x1="140" y1="140" x2="360" y2="140" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  <text x="140" y="155" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">SORA EARLY</text>\n  <text x="360" y="155" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5" text-anchor="end">OPEN-SORA 2</text>\n\n  <!-- 左侧标记点 -->\n  <circle cx="140" cy="140" r="4" fill="#a39e8d" opacity="0.5"/>\n  <!-- 右侧标记点 -->\n  <circle cx="360" cy="140" r="4" fill="#cc785c" opacity="0.8"/>\n\n  <!-- 辅助信息：参数规模 -->\n  <rect x="60" y="170" width="80" height="24" rx="4" fill="#cc785c" opacity="0.12"/>\n  <text x="100" y="186" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">13B</text>\n\n  <!-- 辅助信息：推理速度 -->\n  <rect x="360" y="170" width="80" height="24" rx="4" fill="#cc785c" opacity="0.12"/>\n  <text x="400" y="186" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">8 MIN</text>\n\n  <!-- 底部说明 -->\n  <text x="250" y="220" font-family="Noto Serif SC, serif" font-size="14" fill="#3d3729" text-anchor="middle">OpenSora-2 在 VBench 评测中得分 82.4，接近 Sora 早期版本</text>\n\n  <!-- 协议标签 -->\n  <text x="250" y="236" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">APACHE 2.0 · 单张 RTX 4090 跑 4 秒 1080p</text>\n</svg>',
+      },
+      {
+        kind: '新概念',
+        title: 'Hierarchical Memory for Long-running Agents',
+        glyph: 'spark',
+        teaser: 'DeepMind 提出 Agent 长期记忆的三层架构：工作记忆、情景记忆、语义记忆。',
+        body: [
+          'DeepMind 论文《H-Mem》提出 Agent 长跑时的记忆分层方案：',
+          '• Working memory：当前任务上下文（数千 tokens）。',
+          '• Episodic memory：过去执行过的具体任务（向量库）。',
+          '• Semantic memory：从大量执行中提炼的"经验法则"。',
+          '在 BrowseComp 长任务上，分层记忆让 Agent 完成率从 28% 提升到 47%。',
+          '应用：电商 Agent 跑了一个月之后才知道"周二早上 9 点上新转化率最高"——这种经验需要语义记忆来沉淀。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="20" y="22" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">DEEPMIND · H-MEM</text>\n\n  <!-- 三层架构：工作记忆 -->\n  <rect x="30" y="50" width="120" height="36" rx="6" fill="#cc785c" opacity="0.15" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="90" y="73" font-family="Noto Serif CC, serif" font-size="13" fill="#3d3729" text-anchor="middle">工作记忆</text>\n  <text x="90" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">~数千 TOKENS</text>\n\n  <!-- 箭头1 -->\n  <line x1="150" y1="68" x2="180" y2="68" stroke="#a39e8d" stroke-width="1.5" stroke-dasharray="3 3"/>\n\n  <!-- 三层架构：情景记忆 -->\n  <rect x="185" y="50" width="120" height="36" rx="6" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="245" y="73" font-family="Noto Serif CC, serif" font-size="13" fill="#3d3729" text-anchor="middle">情景记忆</text>\n  <text x="245" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">向量库</text>\n\n  <!-- 箭头2 -->\n  <line x1="305" y1="68" x2="335" y2="68" stroke="#a39e8d" stroke-width="1.5" stroke-dasharray="3 3"/>\n\n  <!-- 三层架构：语义记忆 -->\n  <rect x="340" y="50" width="120" height="36" rx="6" fill="#cc785c" opacity="0.18" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="400" y="73" font-family="Noto Serif CC, serif" font-size="13" fill="#3d3729" text-anchor="middle">语义记忆</text>\n  <text x="400" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">经验法则</text>\n\n  <!-- 底部连接线：三层汇聚 -->\n  <line x1="90" y1="86" x2="90" y2="130" stroke="#e8e3d2" stroke-width="1"/>\n  <line x1="245" y1="86" x2="245" y2="130" stroke="#e8e3d2" stroke-width="1"/>\n  <line x1="400" y1="86" x2="400" y2="130" stroke="#e8e3d2" stroke-width="1"/>\n  <line x1="90" y1="130" x2="400" y2="130" stroke="#e8e3d2" stroke-width="1"/>\n\n  <!-- 汇聚节点 -->\n  <circle cx="245" cy="145" r="8" fill="#cc785c" opacity="0.3" stroke="#cc785c" stroke-width="1.5"/>\n  <text x="245" y="149" font-family="Source Code Pro, monospace" font-size="9" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">→</text>\n\n  <!-- 数字焦点：上下文长度 -->\n  <rect x="155" y="165" width="180" height="28" rx="8" fill="#cc785c" opacity="0.12" stroke="#cc785c" stroke-width="1"/>\n  <text x="245" y="184" font-family="Noto Serif CC, serif" font-size="16" fill="#3d3729" text-anchor="middle">上下文长度 数千 TOKENS</text>\n\n  <!-- 底部说明 -->\n  <text x="20" y="225" font-family="Noto Serif CC, serif" font-size="13" fill="#3d3729">DeepMind H-Mem 三层记忆架构：工作记忆 → 情景记忆 → 语义记忆</text>\n</svg>',
+      },
+      {
+        kind: '政策',
+        title: '白宫发布《2026 AI Action Report》',
+        glyph: 'shield',
+        teaser: '强调本土供应链、关键基础设施 AI 安全审查，对中国出口的 AI 模型不在限制范围。',
+        body: [
+          '白宫 OSTP 在 4 月 30 日发布年度 AI 行动报告：',
+          '• 本土 GPU 制造、能源、训练数据安全列为第一优先级。',
+          '• 关键基础设施（电网、医疗）部署的 AI 系统须通过 NIST 红队测试。',
+          '• 对外贸易：对中国 AI 模型的进口（含中国研发的 SaaS 产品）暂不限制；但中国企业在美训练高算力模型仍受 BIS 出口管制。',
+          '跨境电商角度：对面向美国市场的中国 AI 工具（包括跨境 SaaS、AI 客服）当前没有直接合规风险。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <rect x="20" y="20" width="460" height="200" rx="8" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  \n  <text x="36" y="44" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">POLICY · 2026 AI ACTION REPORT</text>\n  \n  <line x1="36" y1="56" x2="464" y2="56" stroke="#e8e3d2" stroke-width="1"/>\n  \n  <text x="36" y="82" font-family="Noto Serif CC, serif" font-size="15" fill="#3d3729" font-weight="700">NIST RED TEAM</text>\n  <text x="36" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">MANDATORY FOR CRITICAL INFRASTRUCTURE</text>\n  \n  <rect x="36" y="112" width="80" height="80" rx="6" fill="#cc785c" opacity="0.15" stroke="#cc785c" stroke-width="1"/>\n  <text x="76" y="152" font-family="Noto Serif CC, serif" font-size="28" fill="#cc785c" text-anchor="middle" font-weight="700">3</text>\n  <text x="76" y="172" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">CATEGORIES</text>\n  \n  <line x1="130" y1="130" x2="170" y2="130" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="130" y1="152" x2="170" y2="152" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="130" y1="174" x2="170" y2="174" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  \n  <rect x="180" y="112" width="120" height="22" rx="4" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="190" y="127" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">DOMESTIC GPU</text>\n  \n  <rect x="180" y="140" width="120" height="22" rx="4" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="190" y="155" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">ENERGY &amp; DATA</text>\n  \n  <rect x="180" y="168" width="120" height="22" rx="4" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="190" y="183" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">INFRASTRUCTURE</text>\n  \n  <rect x="320" y="112" width="130" height="78" rx="6" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="385" y="134" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">CHINA AI MODELS</text>\n  <text x="385" y="150" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">IMPORT: NOT RESTRICTED</text>\n  <text x="385" y="166" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">TRAINING: BIS CONTROLLED</text>\n  <line x1="335" y1="174" x2="435" y2="174" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="385" y="184" font-family="Source Code Pro, monospace" font-size="8" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">BIS EXPORT RULES APPLY</text>\n  \n  <line x1="36" y1="200" x2="464" y2="200" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="36" y="214" font-family="Noto Serif CC, serif" font-size="13" fill="#3d3729">OSTP · 4月30日 · 三大优先领域 + 中国模型进口暂不限制</text>\n</svg>',
+      },
+      {
+        kind: '公司动态',
+        title: 'Anthropic 招聘"Agent 安全研究员"扩编 80%',
+        glyph: 'box',
+        teaser: 'Anthropic 宣布将 Agent 安全团队从 25 人扩到 45 人，重点关注代理用户操作的对抗性测试。',
+        body: [
+          'Anthropic 在 5 月 1 日的官方博客披露：',
+          '• Agent 安全团队（Agentic Misuse & Reliability）从 25 扩到 45 人。',
+          '• 招募方向：渗透测试、对抗性 prompt、社会工程学背景。',
+          '• 同时启动 "Bug Bounty for Agents"——找出 Claude 在代用户操作中被诱导的方式，最高奖金 $50k。',
+          '信号：头部厂商开始把"代理被骗"当成核心风险，而不是边角料。预示未来 Agent 部署的合规门槛会快速抬升。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="22" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">ANTHROPIC · AGENT SAFETY</text>\n  \n  <!-- 数字焦点：45 人（扩编后规模） -->\n  <text x="250" y="100" font-family="Noto Serif SC, serif" font-size="54" fill="#cc785c" text-anchor="middle" font-weight="700">45</text>\n  <text x="250" y="122" font-family="Source Code Pro, monospace" font-size="11" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">TEAM SIZE</text>\n  \n  <!-- 增长箭头：从 25 到 45 -->\n  <line x1="140" y1="140" x2="360" y2="140" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="160" y1="140" x2="160" y2="110" stroke="#a39e8d" stroke-width="1" stroke-linecap="round"/>\n  <line x1="340" y1="140" x2="340" y2="80" stroke="#cc785c" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>\n  \n  <!-- 起点标签 -->\n  <text x="160" y="155" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">25</text>\n  <text x="160" y="167" font-family="Source Code Pro, monospace" font-size="8" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">MAY 2024</text>\n  \n  <!-- 终点标签 -->\n  <text x="340" y="155" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">45</text>\n  <text x="340" y="167" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">NOW</text>\n  \n  <!-- 奖金标签：$50k -->\n  <rect x="370" y="48" width="80" height="28" rx="4" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="410" y="66" font-family="Source Code Pro, monospace" font-size="11" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">$50K</text>\n  <text x="410" y="80" font-family="Source Code Pro, monospace" font-size="8" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">BOUNTY</text>\n  \n  <!-- 招聘方向标签 -->\n  <rect x="50" y="48" width="100" height="28" rx="4" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="100" y="66" font-family="Source Code Pro, monospace" font-size="9" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">PEN TEST</text>\n  \n  <!-- 底部说明 -->\n  <text x="250" y="210" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729" text-anchor="middle">Anthropic Agent 安全团队扩编 80%，最高赏金 $50k</text>\n  \n  <!-- 扩编百分比指示 -->\n  <line x1="250" y1="130" x2="250" y2="140" stroke="#cc785c" stroke-width="1" opacity="0.4"/>\n  <text x="250" y="138" font-family="Source Code Pro, monospace" font-size="9" fill="#cc785c" text-anchor="middle" letter-spacing="1.5" opacity="0.7">+80%</text>\n</svg>',
+      }
     ],
   },
   {
@@ -649,21 +706,76 @@ window.WEEKLY_ARCHIVE = [
     weekOf: '2026 · 第 17 周 · 4 月 20 日 — 4 月 26 日',
     summary: 'DeepSeek V4 开源、Cursor 推 Background Agents、加州 SB-1047 重启',
     events: [
-      { kind:'模型升级', title:'DeepSeek V4 开源：670B MoE，37B 激活', glyph:'pulse',
-        teaser:'数学、代码、中文三项均超 GPT-5 Turbo，权重 MIT 协议开放。',
-        body:['DeepSeek 在 4 月 22 日开源 V4：670B 参数 MoE（专家混合）架构，每次激活 37B。','• MMLU-Pro 81.2，HumanEval 91.5，CMath 88.0——均超 GPT-5 Turbo。','• 训练成本对外披露：约 $5.8M（H800 集群，2 个月）。','• 权重以 MIT 协议放出，商业使用无限制。','对国内电商：第一个"开源 + 商业可用 + 中文足够好"的 670B 级别模型。本地化部署方案的成本拐点。'] },
-      { kind:'开源项目', title:'Cursor 推出 Background Agents', glyph:'branch',
-        teaser:'编辑器内建后台 Agent，能在用户写代码时同步跑测试、改 bug、补文档。',
-        body:['Cursor 4.0 引入 Background Agents：','• 用户在前台写代码，后台 Agent 持续读 diff，主动建议修复。','• 支持挂多个并行 Agent（一个写测试、一个跑 lint、一个补文档）。','• 与 GitHub Actions 打通，自动开 PR。','对跨境技术团队：这套模式已经从工程师工具溢出到运营场景——"运营在改 listing 时，后台 Agent 同步检查 SEO 关键词、合规风险、库存匹配"是同一种范式。'] },
-      { kind:'新概念', title:'Constitutional Classifiers 防越狱', glyph:'spark',
-        teaser:'Anthropic 发表新论文：用宪法 AI 训练的分类器把 jailbreak 成功率从 86% 降到 4.4%。',
-        body:['Anthropic 论文《Constitutional Classifiers》本周登 arxiv 头条：','• 用 Claude 自身按"宪法"生成数千万条对抗样本，训练专用分类器。','• 在大规模红队测试（3000+ 小时）中，jailbreak 成功率从基线 86% 降到 4.4%。','• 计算开销：增加约 4% 推理成本。','应用预期：将集成进 Claude API 默认链路，对外暴露成本极低。可能成为合规部署 Agent 的"准入门槛"。'] },
-      { kind:'政策', title:'加州 SB-1047 重启立法程序', glyph:'shield',
-        teaser:'被州长否决一年后，加州议员重提改写版本，对 1e26 FLOPS 以上模型设定责任框架。',
-        body:['加州参议员 Wiener 4 月 24 日提交 SB-1047 修订版：','• 适用门槛上调至训练算力 1e26 FLOPS（原 1e25），覆盖前沿模型。','• 删除原版"关闭开关"强制要求，改为"重大事故响应预案"。','• 增加"安全披露义务"——开发者须公开模型的红队测试结果。','加州若通过，事实上将成为美国 AI 安全监管的"事实标准"，对在加州运营的 OpenAI、Anthropic、Meta、Google 全部适用。'] },
-      { kind:'公司动态', title:'TikTok Shop 全量启用 AI 视频选品页', glyph:'box',
-        teaser:'TikTok 在 4 月 25 日宣布：所有商家的商品页改为 AI 自动剪辑短视频展示，无需上传素材。',
-        body:['TikTok Shop 美国站本周全量推送 "AI Showcase"：','• 商家上传商品图 + 文字描述，系统自动生成 6 秒短视频。','• 视频根据用户画像（年龄、地区、兴趣）个性化渲染——同一 SKU 不同人看到的版本不同。','• 商家可一键替换为人工拍摄版本，但默认开启 AI 版。','对中国卖家：之前"做不出本地化短视频"的痛点被平台层吸收。竞争点从"视频质量"上移到"产品本身 + 文案描述"。'] },
+      {
+        kind: '模型升级',
+        title: 'DeepSeek V4 开源：670B MoE，37B 激活',
+        glyph: 'pulse',
+        teaser: '数学、代码、中文三项均超 GPT-5 Turbo，权重 MIT 协议开放。',
+        body: [
+          'DeepSeek 在 4 月 22 日开源 V4：670B 参数 MoE（专家混合）架构，每次激活 37B。',
+          '• MMLU-Pro 81.2，HumanEval 91.5，CMath 88.0——均超 GPT-5 Turbo。',
+          '• 训练成本对外披露：约 $5.8M（H800 集群，2 个月）。',
+          '• 权重以 MIT 协议放出，商业使用无限制。',
+          '对国内电商：第一个"开源 + 商业可用 + 中文足够好"的 670B 级别模型。本地化部署方案的成本拐点。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="24" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">MODEL UPGRADE</text>\n  <text x="16" y="40" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">DEEPSEEK V4 · 22 APR</text>\n\n  <!-- 670B 主数字焦点 -->\n  <text x="250" y="100" font-family="Noto Serif SC, serif" font-size="56" fill="#3d3729" text-anchor="middle" font-weight="700">670B</text>\n  <text x="250" y="120" font-family="Source Code Pro, monospace" font-size="11" fill="#7a7363" text-anchor="middle" letter-spacing="2">TOTAL PARAMETERS</text>\n\n  <!-- 激活 37B 辅助标签 -->\n  <rect x="170" y="130" width="160" height="24" rx="12" fill="#cc785c" opacity="0.15"/>\n  <text x="250" y="147" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">ACTIVATED: 37B</text>\n\n  <!-- 评测分三列 -->\n  <line x1="80" y1="165" x2="420" y2="165" stroke="#e8e3d2" stroke-width="1"/>\n  \n  <text x="110" y="182" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">MMLU-PRO</text>\n  <text x="110" y="198" font-family="Noto Serif SC, serif" font-size="16" fill="#3d3729" text-anchor="middle">81.2</text>\n\n  <text x="250" y="182" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">HUMANEVAL</text>\n  <text x="250" y="198" font-family="Noto Serif SC, serif" font-size="16" fill="#3d3729" text-anchor="middle">91.5</text>\n\n  <text x="390" y="182" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">CMATH</text>\n  <text x="390" y="198" font-family="Noto Serif SC, serif" font-size="16" fill="#3d3729" text-anchor="middle">88.0</text>\n\n  <!-- 底部事实 -->\n  <text x="250" y="228" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729" text-anchor="middle">训练成本 $5.8M · MIT 协议 · 超 GPT‑5 Turbo</text>\n\n  <!-- 小标签：权重开放 -->\n  <rect x="380" y="10" width="104" height="20" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="432" y="24" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">MIT LICENSE</text>\n</svg>',
+      },
+      {
+        kind: '开源项目',
+        title: 'Cursor 推出 Background Agents',
+        glyph: 'branch',
+        teaser: '编辑器内建后台 Agent，能在用户写代码时同步跑测试、改 bug、补文档。',
+        body: [
+          'Cursor 4.0 引入 Background Agents：',
+          '• 用户在前台写代码，后台 Agent 持续读 diff，主动建议修复。',
+          '• 支持挂多个并行 Agent（一个写测试、一个跑 lint、一个补文档）。',
+          '• 与 GitHub Actions 打通，自动开 PR。',
+          '对跨境技术团队：这套模式已经从工程师工具溢出到运营场景——"运营在改 listing 时，后台 Agent 同步检查 SEO 关键词、合规风险、库存匹配"是同一种范式。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="20" y="28" font-family="Source Code Pro, monospace" font-size="11" fill="#a39e8d" letter-spacing="2">CURSOR 4.0</text>\n  \n  <!-- 三个并行 Agent 节点 -->\n  <rect x="60" y="50" width="100" height="36" rx="6" fill="#cc785c" opacity="0.15" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="110" y="73" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">TEST</text>\n  \n  <rect x="200" y="50" width="100" height="36" rx="6" fill="#cc785c" opacity="0.15" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="250" y="73" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">LINT</text>\n  \n  <rect x="340" y="50" width="100" height="36" rx="6" fill="#cc785c" opacity="0.15" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="390" y="73" font-family="Source Code Pro, monospace" font-size="10" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">DOCS</text>\n  \n  <!-- 连接线：三个 Agent 汇聚到 PR -->\n  <line x1="110" y1="86" x2="110" y2="120" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="250" y1="86" x2="250" y2="120" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="390" y1="86" x2="390" y2="120" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="110" y1="120" x2="390" y2="120" stroke="#a39e8d" stroke-width="1"/>\n  <line x1="250" y1="120" x2="250" y2="140" stroke="#a39e8d" stroke-width="1"/>\n  \n  <!-- PR 节点（视觉焦点） -->\n  <rect x="190" y="140" width="120" height="40" rx="8" fill="#cc785c" opacity="0.18" stroke="#cc785c" stroke-width="1.5"/>\n  <text x="250" y="165" font-family="Source Code Pro, monospace" font-size="11" fill="#3d3729" text-anchor="middle" letter-spacing="2">PR</text>\n  \n  <!-- GitHub Actions 标签 -->\n  <rect x="320" y="148" width="80" height="24" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="360" y="164" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">GITHUB ACTIONS</text>\n  <line x1="310" y1="160" x2="320" y2="160" stroke="#a39e8d" stroke-width="1" stroke-dasharray="2 2"/>\n  \n  <!-- 后台运行指示 -->\n  <rect x="20" y="50" width="24" height="24" rx="4" fill="none" stroke="#a39e8d" stroke-width="1"/>\n  <text x="32" y="66" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" text-anchor="middle">▶</text>\n  <text x="20" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">BACKGROUND</text>\n  \n  <!-- 底部事实 -->\n  <text x="250" y="215" font-family="Noto Serif SC, serif" font-size="15" fill="#3d3729" text-anchor="middle">3 个并行 Agent 自动开 PR</text>\n</svg>',
+      },
+      {
+        kind: '新概念',
+        title: 'Constitutional Classifiers 防越狱',
+        glyph: 'spark',
+        teaser: 'Anthropic 发表新论文：用宪法 AI 训练的分类器把 jailbreak 成功率从 86% 降到 4.4%。',
+        body: [
+          'Anthropic 论文《Constitutional Classifiers》本周登 arxiv 头条：',
+          '• 用 Claude 自身按"宪法"生成数千万条对抗样本，训练专用分类器。',
+          '• 在大规模红队测试（3000+ 小时）中，jailbreak 成功率从基线 86% 降到 4.4%。',
+          '• 计算开销：增加约 4% 推理成本。',
+          '应用预期：将集成进 Claude API 默认链路，对外暴露成本极低。可能成为合规部署 Agent 的"准入门槛"。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="20" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">ANTHROPIC · CONSTITUTIONAL CLASSIFIERS</text>\n  \n  <rect x="40" y="40" width="420" height="130" rx="6" fill="#cc785c" opacity="0.14" stroke="#d4cfbe" stroke-width="1"/>\n  \n  <text x="80" y="80" font-family="Noto Serif SC, serif" font-size="15" fill="#3d3729" font-weight="700">JAILBREAK 成功率</text>\n  \n  <line x1="80" y1="100" x2="80" y2="140" stroke="#3d3729" stroke-width="1.5" stroke-linecap="round"/>\n  <line x1="80" y1="140" x2="380" y2="140" stroke="#e8e3d2" stroke-width="1" stroke-linecap="round"/>\n  \n  <line x1="80" y1="100" x2="200" y2="100" stroke="#3d3729" stroke-width="1.5" stroke-linecap="round"/>\n  <line x1="200" y1="100" x2="200" y2="140" stroke="#3d3729" stroke-width="1" stroke-linecap="round" stroke-dasharray="3 3"/>\n  \n  <line x1="200" y1="100" x2="380" y2="135" stroke="#cc785c" stroke-width="1.5" stroke-linecap="round"/>\n  \n  <circle cx="80" cy="100" r="4" fill="#3d3729"/>\n  <text x="80" y="95" font-family="Source Code Pro, monospace" font-size="11" fill="#3d3729" text-anchor="middle" letter-spacing="1.5">86%</text>\n  \n  <circle cx="380" cy="135" r="4" fill="#cc785c"/>\n  <text x="380" y="130" font-family="Source Code Pro, monospace" font-size="11" fill="#cc785c" text-anchor="middle" letter-spacing="1.5">4.4%</text>\n  \n  <text x="140" y="100" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">基线</text>\n  <text x="290" y="120" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">-95%</text>\n  \n  <rect x="80" y="155" width="120" height="24" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="140" y="171" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">+4% 推理成本</text>\n  \n  <rect x="220" y="155" width="160" height="24" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="300" y="171" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="1.5">3000+ 小时红队测试</text>\n  \n  <text x="250" y="220" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729" text-anchor="middle">宪法分类器将越狱攻击从 86% 压制至 4.4%</text>\n</svg>',
+      },
+      {
+        kind: '政策',
+        title: '加州 SB-1047 重启立法程序',
+        glyph: 'shield',
+        teaser: '被州长否决一年后，加州议员重提改写版本，对 1e26 FLOPS 以上模型设定责任框架。',
+        body: [
+          '加州参议员 Wiener 4 月 24 日提交 SB-1047 修订版：',
+          '• 适用门槛上调至训练算力 1e26 FLOPS（原 1e25），覆盖前沿模型。',
+          '• 删除原版"关闭开关"强制要求，改为"重大事故响应预案"。',
+          '• 增加"安全披露义务"——开发者须公开模型的红队测试结果。',
+          '加州若通过，事实上将成为美国 AI 安全监管的"事实标准"，对在加州运营的 OpenAI、Anthropic、Meta、Google 全部适用。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="20" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">POLICY · SB-1047 REVISED</text>\n  \n  <rect x="40" y="50" width="420" height="130" rx="6" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  \n  <text x="60" y="85" font-family="Source Code Pro, monospace" font-size="11" fill="#7a7363" letter-spacing="1.5">TRAINING FLOPS THRESHOLD</text>\n  \n  <text x="60" y="125" font-family="Noto Serif SC, serif" font-size="18" fill="#3d3729">1 × 10</text>\n  <text x="175" y="115" font-family="Source Code Pro, monospace" font-size="14" fill="#3d3729">26</text>\n  <text x="200" y="125" font-family="Noto Serif SC, serif" font-size="18" fill="#3d3729">FLOPS</text>\n  \n  <line x1="60" y1="140" x2="380" y2="140" stroke="#e8e3d2" stroke-width="1"/>\n  \n  <text x="60" y="158" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">OLD: 1E25 FLOPS</text>\n  <line x1="60" y1="162" x2="150" y2="162" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  \n  <rect x="60" y="168" width="4" height="4" rx="1" fill="#cc785c" opacity="0.6"/>\n  <text x="70" y="175" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1.5">REMOVED: KILL SWITCH</text>\n  \n  <rect x="200" y="168" width="4" height="4" rx="1" fill="#cc785c" opacity="0.6"/>\n  <text x="210" y="175" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1.5">ADDED: RED-TEAM DISCLOSURE</text>\n  \n  <text x="60" y="200" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729">加州参议员 Wiener 4 月 24 日提交修订版，算力门槛上调 10 倍</text>\n</svg>',
+      },
+      {
+        kind: '公司动态',
+        title: 'TikTok Shop 全量启用 AI 视频选品页',
+        glyph: 'box',
+        teaser: 'TikTok 在 4 月 25 日宣布：所有商家的商品页改为 AI 自动剪辑短视频展示，无需上传素材。',
+        body: [
+          'TikTok Shop 美国站本周全量推送 "AI Showcase"：',
+          '• 商家上传商品图 + 文字描述，系统自动生成 6 秒短视频。',
+          '• 视频根据用户画像（年龄、地区、兴趣）个性化渲染——同一 SKU 不同人看到的版本不同。',
+          '• 商家可一键替换为人工拍摄版本，但默认开启 AI 版。',
+          '对中国卖家：之前"做不出本地化短视频"的痛点被平台层吸收。竞争点从"视频质量"上移到"产品本身 + 文案描述"。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <rect x="0" y="0" width="500" height="240" fill="#faf9f5" rx="8"/>\n  <text x="20" y="24" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">TIKTOK SHOP · AI SHOWCASE</text>\n  \n  <!-- 核心视觉：三个商品卡片，中间突出 6 秒 -->\n  <rect x="80" y="50" width="100" height="130" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="80" y="50" width="100" height="80" rx="6" fill="#cc785c" opacity="0.15"/>\n  <text x="130" y="100" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">商品 A</text>\n  <text x="130" y="115" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">25-35 岁</text>\n  <text x="130" y="130" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">纽约</text>\n  <text x="130" y="150" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#3d3729">运动版</text>\n\n  <rect x="200" y="50" width="100" height="130" rx="6" fill="none" stroke="#cc785c" stroke-width="1.5"/>\n  <rect x="200" y="50" width="100" height="80" rx="6" fill="#cc785c" opacity="0.12"/>\n  <text x="250" y="100" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">商品 B</text>\n  <text x="250" y="115" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">18-24 岁</text>\n  <text x="250" y="130" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">洛杉矶</text>\n  <text x="250" y="150" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#3d3729">潮流版</text>\n  \n  <!-- 6 秒 大数字焦点 -->\n  <text x="250" y="68" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="18" fill="#cc785c" font-weight="bold">6</text>\n  <text x="250" y="82" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#cc785c" letter-spacing="1.5">秒</text>\n\n  <rect x="320" y="50" width="100" height="130" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="320" y="50" width="100" height="80" rx="6" fill="#cc785c" opacity="0.15"/>\n  <text x="370" y="100" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">商品 C</text>\n  <text x="370" y="115" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">35-45 岁</text>\n  <text x="370" y="130" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d">芝加哥</text>\n  <text x="370" y="150" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="11" fill="#3d3729">实用版</text>\n\n  <!-- 个性化箭头 -->\n  <line x1="130" y1="180" x2="250" y2="195" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  <line x1="370" y1="180" x2="250" y2="195" stroke="#a39e8d" stroke-width="1" stroke-dasharray="3 3"/>\n  <text x="250" y="210" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">同一 SKU · 不同版本</text>\n\n  <!-- 底部事实 -->\n  <text x="250" y="230" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729">TikTok Shop 美国站全量推送 AI 视频选品页</text>\n</svg>',
+      }
     ],
   },
   {
@@ -671,21 +783,75 @@ window.WEEKLY_ARCHIVE = [
     weekOf: '2026 · 第 16 周 · 4 月 13 日 — 4 月 19 日',
     summary: 'Google Gemini 2.5 发布、Meta Llama-4 开源、欧盟 AI Act 全面生效首周',
     events: [
-      { kind:'模型升级', title:'Google Gemini 2.5 发布：原生 Agent 模式', glyph:'pulse',
-        teaser:'Gemini 2.5 Pro 与 Workspace 深度整合，Gmail / Docs / Sheets 内置 Agent 操作。',
-        body:['Google I/O 提前一个月发布 Gemini 2.5：','• 在 Workspace 全家桶内置 "Side Agent"，可代用户回邮件、整理文档、跑 Sheets 公式。','• 视频理解（YouTube 链接直接分析）原生支持，30 分钟视频 1 分钟读完。','• 价格与 GPT-5 Turbo 平级。','对运营：Gmail 里的客户邮件自动归类、回复草稿、订单状态查询全部内置——之前需要单独搭建的客服自动化第一次出现在工具自带的层面。'] },
-      { kind:'开源项目', title:'Meta 开源 Llama-4：405B 与 11B 双版本', glyph:'branch',
-        teaser:'保持完全开放权重 + 商业可用协议，11B 版本可在消费级显卡运行。',
-        body:['Meta 4 月 16 日发布 Llama-4：','• 405B 旗舰版：MMLU 86.0，对标 Claude Sonnet 4.5。','• 11B 紧凑版：可在 24GB 显存（4090）跑，MMLU 72.5。','• 协议：Llama 4 Community License，月活 7 亿以下完全免费商用。','对中小团队：11B 版本第一次让"在自己机器上跑一个能用的 LLM"门槛降到 4090 一张卡。本地部署的隐私敏感场景（财务、客户数据）开始有非云方案。'] },
-      { kind:'新概念', title:'Speculative Decoding × MoE', glyph:'spark',
-        teaser:'NVIDIA 与 MIT 联合论文：在 MoE 模型上做投机解码，推理速度再提 3.2x。',
-        body:['投机解码（speculative decoding）原本只在密集模型上有效。','本周 NVIDIA × MIT 论文证明：用一个小密集模型作为 draft，大 MoE 作为 verifier，可在 MoE 上同样获得 3.2x 加速。','在 GPT-5 Turbo（推测为 MoE）上实测：tokens/s 从 70 提升到 220。','应用预期：6 月内被 vLLM、TGI 等开源推理引擎集成。Agent 跑长任务的"推理慢"问题有望进一步缓解。'] },
-      { kind:'政策', title:'欧盟 AI Act 全面适用首周', glyph:'shield',
-        teaser:'通用大模型条款（GPAI）于 4 月 13 日全面生效，OpenAI、Anthropic 已提交首份合规报告。',
-        body:['欧盟 AI Act 的通用人工智能（GPAI）条款本周全面适用：','• 训练算力 > 10^25 FLOPS 的模型须提交风险评估、能耗报告、版权数据来源说明。','• 不合规罚款：最高 1500 万欧元或全球营收 3%。','OpenAI、Anthropic、Google、Meta、Mistral 五家已在生效首日提交首份合规报告。','对中国卖家：使用这些模型的 API 服务时，欧盟用户数据流转需注意 DPF（数据隐私框架）合规——大多数云厂商已默认在欧洲区域托管。'] },
-      { kind:'公司动态', title:'Stripe 收购 Agent 支付协议公司 Lithic', glyph:'box',
-        teaser:'Stripe 以 11 亿美元收购 Lithic，目标是给 Agent 发"专用虚拟卡"，每张卡有授权额度与场景限制。',
-        body:['Stripe 4 月 18 日宣布以 $1.1B 收购 Lithic：','• Lithic 提供"细粒度授权虚拟卡"——单卡限单商户、单类目、单次额度。','• 收购后的产品定位：让 Agent 拿一张"只能在这家供应商、只能买耗材、单次不超过 $500"的卡，限定爆雷半径。','信号：Agent 产业链在补"风险护栏"层。这是从 demo 到大规模部署的必经一步。','对跨境财务：未来一年内，给 Agent 配"专用支付权限"会是合规标配，类似今天的"分级 RBAC"。'] },
+      {
+        kind: '模型升级',
+        title: 'Google Gemini 2.5 发布：原生 Agent 模式',
+        glyph: 'pulse',
+        teaser: 'Gemini 2.5 Pro 与 Workspace 深度整合，Gmail / Docs / Sheets 内置 Agent 操作。',
+        body: [
+          'Google I/O 提前一个月发布 Gemini 2.5：',
+          '• 在 Workspace 全家桶内置 "Side Agent"，可代用户回邮件、整理文档、跑 Sheets 公式。',
+          '• 视频理解（YouTube 链接直接分析）原生支持，30 分钟视频 1 分钟读完。',
+          '• 价格与 GPT-5 Turbo 平级。',
+          '对运营：Gmail 里的客户邮件自动归类、回复草稿、订单状态查询全部内置——之前需要单独搭建的客服自动化第一次出现在工具自带的层面。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="22" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">MODEL UPGRADE</text>\n  <text x="16" y="40" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">GEMINI 2.5 PRO</text>\n\n  <!-- 核心数字：30分钟视频1分钟读完 -->\n  <text x="250" y="90" font-family="Noto Serif SC, serif" font-size="48" fill="#cc785c" text-anchor="middle" font-weight="700">30:1</text>\n  <text x="250" y="112" font-family="Source Code Pro, monospace" font-size="10" fill="#7a7363" text-anchor="middle" letter-spacing="2">VIDEO COMPRESSION RATIO</text>\n\n  <!-- 对比条：30分钟 vs 1分钟 -->\n  <rect x="80" y="130" width="180" height="8" rx="4" fill="#cc785c" opacity="0.15"/>\n  <rect x="80" y="130" width="6" height="8" rx="3" fill="#cc785c" opacity="0.6"/>\n  <text x="80" y="150" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">30 MIN</text>\n\n  <rect x="280" y="130" width="140" height="8" rx="4" fill="#cc785c" opacity="0.15"/>\n  <rect x="280" y="130" width="6" height="8" rx="3" fill="#cc785c" opacity="0.6"/>\n  <text x="280" y="150" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">1 MIN</text>\n\n  <!-- 箭头 -->\n  <line x1="266" y1="134" x2="274" y2="134" stroke="#3d3729" stroke-width="1.2" stroke-linecap="round"/>\n  <polygon points="274,130 280,134 274,138" fill="#3d3729"/>\n\n  <!-- 三个功能标签 -->\n  <rect x="50" y="170" width="120" height="22" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="110" y="184" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">SIDE AGENT</text>\n\n  <rect x="190" y="170" width="120" height="22" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="250" y="184" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">YOUTUBE NATIVE</text>\n\n  <rect x="330" y="170" width="120" height="22" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="390" y="184" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">GPT-5 TURBO PAR</text>\n\n  <!-- 底部事实 -->\n  <text x="250" y="220" font-family="Noto Serif SC, serif" font-size="14" fill="#3d3729" text-anchor="middle">Gemini 2.5 Pro 视频理解压缩比达 30:1</text>\n</svg>',
+      },
+      {
+        kind: '开源项目',
+        title: 'Meta 开源 Llama-4：405B 与 11B 双版本',
+        glyph: 'branch',
+        teaser: '保持完全开放权重 + 商业可用协议，11B 版本可在消费级显卡运行。',
+        body: [
+          'Meta 4 月 16 日发布 Llama-4：',
+          '• 405B 旗舰版：MMLU 86.0，对标 Claude Sonnet 4.5。',
+          '• 11B 紧凑版：可在 24GB 显存（4090）跑，MMLU 72.5。',
+          '• 协议：Llama 4 Community License，月活 7 亿以下完全免费商用。',
+          '对中小团队：11B 版本第一次让"在自己机器上跑一个能用的 LLM"门槛降到 4090 一张卡。本地部署的隐私敏感场景（财务、客户数据）开始有非云方案。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="22" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">OPEN SOURCE</text>\n  <text x="16" y="38" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">META · LLAMA-4</text>\n\n  <!-- 405B 主条 -->\n  <rect x="60" y="70" width="280" height="28" rx="6" fill="#cc785c" opacity="0.15"/>\n  <rect x="60" y="70" width="280" height="28" rx="6" fill="none" stroke="#cc785c" stroke-width="1.5"/>\n  <text x="72" y="88" font-family="Noto Serif SC, serif" font-size="15" fill="#3d3729" font-weight="700">405B</text>\n  <text x="120" y="88" font-family="Source Code Pro, monospace" font-size="11" fill="#7a7363" letter-spacing="1.5">MMLU 86.0</text>\n  <text x="260" y="88" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">CLAUDE SONNET 4.5 对标</text>\n\n  <!-- 11B 副条 -->\n  <rect x="60" y="112" width="160" height="28" rx="6" fill="#cc785c" opacity="0.12"/>\n  <rect x="60" y="112" width="160" height="28" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="72" y="130" font-family="Noto Serif SC, serif" font-size="15" fill="#3d3729" font-weight="700">11B</text>\n  <text x="112" y="130" font-family="Source Code Pro, monospace" font-size="11" fill="#7a7363" letter-spacing="1.5">MMLU 72.5</text>\n\n  <!-- 消费级显卡标签 -->\n  <rect x="230" y="114" width="120" height="24" rx="12" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="242" y="130" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">24GB · RTX 4090</text>\n\n  <!-- 协议标签 -->\n  <rect x="60" y="158" width="200" height="22" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1" stroke-dasharray="3 3"/>\n  <text x="72" y="173" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">LLAMA 4 COMMUNITY LICENSE</text>\n  <text x="280" y="173" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">月活 &lt; 7亿 免费商用</text>\n\n  <!-- 底部事实 -->\n  <text x="16" y="220" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729">Meta 开源 Llama-4 双版本 · 405B 旗舰 MMLU 86.0</text>\n</svg>',
+      },
+      {
+        kind: '新概念',
+        title: 'Speculative Decoding × MoE',
+        glyph: 'spark',
+        teaser: 'NVIDIA 与 MIT 联合论文：在 MoE 模型上做投机解码，推理速度再提 3.2x。',
+        body: [
+          '投机解码（speculative decoding）原本只在密集模型上有效。',
+          '本周 NVIDIA × MIT 论文证明：用一个小密集模型作为 draft，大 MoE 作为 verifier，可在 MoE 上同样获得 3.2x 加速。',
+          '在 GPT-5 Turbo（推测为 MoE）上实测：tokens/s 从 70 提升到 220。',
+          '应用预期：6 月内被 vLLM、TGI 等开源推理引擎集成。Agent 跑长任务的"推理慢"问题有望进一步缓解。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="22" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2">WEEK 19 · NVIDIA × MIT</text>\n\n  <!-- 左侧：密集 draft 模型示意（小方块） -->\n  <rect x="30" y="60" width="40" height="40" rx="4" fill="#cc785c" opacity="0.15" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="50" y="85" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">DRAFT</text>\n\n  <!-- 箭头：draft → verifier -->\n  <line x1="74" y1="80" x2="110" y2="80" stroke="#3d3729" stroke-width="1.5" stroke-linecap="round"/>\n  <polygon points="108,75 118,80 108,85" fill="#3d3729"/>\n\n  <!-- 右侧：MoE verifier 示意（大框 + 多个小方块） -->\n  <rect x="122" y="50" width="120" height="60" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="130" y="58" width="24" height="20" rx="3" fill="#cc785c" opacity="0.18" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="160" y="58" width="24" height="20" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="190" y="58" width="24" height="20" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="130" y="82" width="24" height="20" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="160" y="82" width="24" height="20" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <rect x="190" y="82" width="24" height="20" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="182" y="85" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" text-anchor="middle" letter-spacing="1.5">VERIFIER</text>\n\n  <!-- 右侧：加速倍数 3.2x 视觉焦点 -->\n  <rect x="280" y="50" width="90" height="60" rx="8" fill="#cc785c" opacity="0.15" stroke="#cc785c" stroke-width="1.5"/>\n  <text x="325" y="78" font-family="Noto Serif SC, serif" font-size="28" fill="#cc785c" text-anchor="middle">3.2×</text>\n  <text x="325" y="96" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="2">SPEEDUP</text>\n\n  <!-- 底部：tokens/s 对比条 -->\n  <text x="30" y="150" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">BEFORE</text>\n  <rect x="30" y="156" width="70" height="12" rx="3" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="105" y="166" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">70 TOK/S</text>\n\n  <text x="30" y="192" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">AFTER</text>\n  <rect x="30" y="198" width="220" height="12" rx="3" fill="#cc785c" opacity="0.18" stroke="#cc785c" stroke-width="1"/>\n  <text x="255" y="208" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">220 TOK/S</text>\n\n  <!-- 底部事实 -->\n  <text x="250" y="235" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729" text-anchor="middle">GPT-5 TURBO 实测：70 → 220 TOK/S</text>\n</svg>',
+      },
+      {
+        kind: '政策',
+        title: '欧盟 AI Act 全面适用首周',
+        glyph: 'shield',
+        teaser: '通用大模型条款（GPAI）于 4 月 13 日全面生效，OpenAI、Anthropic 已提交首份合规报告。',
+        body: [
+          '欧盟 AI Act 的通用人工智能（GPAI）条款本周全面适用：',
+          '• 训练算力 > 10^25 FLOPS 的模型须提交风险评估、能耗报告、版权数据来源说明。',
+          '• 不合规罚款：最高 1500 万欧元或全球营收 3%。',
+          'OpenAI、Anthropic、Google、Meta、Mistral 五家已在生效首日提交首份合规报告。',
+          '对中国卖家：使用这些模型的 API 服务时，欧盟用户数据流转需注意 DPF（数据隐私框架）合规——大多数云厂商已默认在欧洲区域托管。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="16" y="20" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">EU AI ACT · WEEK 1</text>\n\n  <!-- 盾牌轮廓 -->\n  <rect x="40" y="40" width="120" height="140" rx="8" fill="#faf9f5" stroke="#d4cfbe" stroke-width="1.2"/>\n  <rect x="40" y="40" width="120" height="30" rx="8" fill="#cc785c" opacity="0.14"/>\n  <text x="100" y="60" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#3d3729" letter-spacing="1.5">GPAI</text>\n\n  <!-- 数字焦点：1500万欧元 -->\n  <text x="100" y="105" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="28" fill="#3d3729" font-weight="bold">€15M</text>\n  <text x="100" y="125" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9" fill="#7a7363" letter-spacing="1.5">MAX FINE</text>\n\n  <!-- 算力阈值标签 -->\n  <rect x="55" y="140" width="90" height="18" rx="4" fill="none" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="100" y="153" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="8" fill="#a39e8d" letter-spacing="1">10²⁵ FLOPS</text>\n\n  <!-- 五家提交报告 -->\n  <rect x="55" y="165" width="90" height="14" rx="4" fill="#cc785c" opacity="0.12"/>\n  <text x="100" y="175" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="7" fill="#3d3729" letter-spacing="1">5 COMPLIANCE REPORTS</text>\n\n  <!-- 右侧流向箭头 -->\n  <line x1="168" y1="110" x2="200" y2="110" stroke="#a39e8d" stroke-width="1.2" stroke-dasharray="3 3"/>\n  <polygon points="198,105 208,110 198,115" fill="#a39e8d"/>\n\n  <!-- 右侧风险/能耗/版权三项 -->\n  <rect x="215" y="45" width="130" height="28" rx="6" fill="#faf9f5" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="225" y="63" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1">RISK ASSESSMENT</text>\n\n  <rect x="215" y="80" width="130" height="28" rx="6" fill="#faf9f5" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="225" y="98" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1">ENERGY REPORT</text>\n\n  <rect x="215" y="115" width="130" height="28" rx="6" fill="#faf9f5" stroke="#e8e3d2" stroke-width="1"/>\n  <text x="225" y="133" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1">COPYRIGHT SOURCES</text>\n\n  <!-- 底部公司名 -->\n  <text x="215" y="170" font-family="Source Code Pro, monospace" font-size="7" fill="#a39e8d" letter-spacing="1">OPENAI · ANTHROPIC · GOOGLE</text>\n  <text x="215" y="183" font-family="Source Code Pro, monospace" font-size="7" fill="#a39e8d" letter-spacing="1">META · MISTRAL</text>\n\n  <!-- 底部事实 -->\n  <text x="250" y="220" text-anchor="middle" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729">GPAI 条款全面适用，最高罚款 1500 万欧元</text>\n</svg>',
+      },
+      {
+        kind: '公司动态',
+        title: 'Stripe 收购 Agent 支付协议公司 Lithic',
+        glyph: 'box',
+        teaser: 'Stripe 以 11 亿美元收购 Lithic，目标是给 Agent 发"专用虚拟卡"，每张卡有授权额度与场景限制。',
+        body: [
+          'Stripe 4 月 18 日宣布以 $1.1B 收购 Lithic：',
+          '• Lithic 提供"细粒度授权虚拟卡"——单卡限单商户、单类目、单次额度。',
+          '• 收购后的产品定位：让 Agent 拿一张"只能在这家供应商、只能买耗材、单次不超过 $500"的卡，限定爆雷半径。',
+          '信号：Agent 产业链在补"风险护栏"层。这是从 demo 到大规模部署的必经一步。',
+          '对跨境财务：未来一年内，给 Agent 配"专用支付权限"会是合规标配，类似今天的"分级 RBAC"。'
+        ],
+        svg: '<svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">\n  <text x="20" y="22" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="2">WEEK 16 · STRIPE</text>\n\n  <!-- 卡片主体：虚拟卡示意 -->\n  <rect x="100" y="50" width="300" height="140" rx="10" fill="#cc785c" opacity="0.12" stroke="#d4cfbe" stroke-width="1"/>\n\n  <!-- 卡面细节 -->\n  <rect x="120" y="70" width="260" height="100" rx="6" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="140" y="100" font-family="Source Code Pro, monospace" font-size="10" fill="#7a7363" letter-spacing="2">AGENT PAYMENT CARD</text>\n\n  <!-- 金额焦点：$500 -->\n  <text x="140" y="140" font-family="Noto Serif SC, serif" font-size="36" fill="#cc785c" font-weight="bold">$500</text>\n  <text x="140" y="158" font-family="Source Code Pro, monospace" font-size="9" fill="#a39e8d" letter-spacing="1.5">SINGLE-TRANSACTION LIMIT</text>\n\n  <!-- 限制标签 -->\n  <rect x="280" y="85" width="80" height="20" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="290" y="98" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1.5">MERCHANT LOCK</text>\n\n  <rect x="280" y="112" width="80" height="20" rx="4" fill="none" stroke="#d4cfbe" stroke-width="1"/>\n  <text x="290" y="125" font-family="Source Code Pro, monospace" font-size="8" fill="#7a7363" letter-spacing="1.5">CATEGORY BIND</text>\n\n  <!-- 收购金额标注 -->\n  <line x1="100" y1="50" x2="100" y2="190" stroke="#e8e3d2" stroke-width="1" stroke-dasharray="3 3"/>\n  <text x="30" y="120" font-family="Source Code Pro, monospace" font-size="10" fill="#a39e8d" letter-spacing="2" transform="rotate(-90 30 120)">ACQUISITION $1.1B</text>\n\n  <!-- 底部事实 -->\n  <text x="20" y="220" font-family="Noto Serif SC, serif" font-size="13" fill="#3d3729">Stripe 以 11 亿美元收购 Lithic，为 Agent 定制单笔 $500 限额虚拟卡</text>\n</svg>',
+      }
     ],
-  },
+  }
 ];
