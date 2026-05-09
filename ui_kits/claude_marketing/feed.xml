@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Midea AI Lab · 跨境电商技术观察站</title>
+    <link>https://midea-ai-lab.example.com/</link>
+    <description>美的电商 AI 团队的对外观察站。每周大事件 · 电商思考 · 论文带读。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://midea-ai-lab.example.com/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 May 2026 23:00:00 +0800</lastBuildDate>
+    <generator>Midea AI Lab static feed v0.1</generator>
+
+    <item>
+      <title>每周大事件 · 第 19 周（2026.05.04—05.08）</title>
+      <link>https://midea-ai-lab.example.com/#weekly</link>
+      <guid isPermaLink="false">midea-ai-lab-weekly-2026-w19</guid>
+      <pubDate>Sun, 08 May 2026 22:00:00 +0800</pubDate>
+      <description>Sonnet 4.5 上线 200K · agent-toolkit 破 30k stars · Test-time Self-Distillation · 欧盟 Agentic 补充指引 · Shopify 集成 Claude/GPT 客服。</description>
+    </item>
+    <item>
+      <title>电商思考 · 从机器翻译到品牌一致性：Listing 自动化的三段式跃迁</title>
+      <link>https://midea-ai-lab.example.com/#essays/0</link>
+      <guid isPermaLink="false">midea-ai-lab-essays-agentic-listing-2026-05</guid>
+      <pubDate>Mon, 05 May 2026 09:00:00 +0800</pubDate>
+      <description>当模型能"理解"品牌而不只是"翻译"文字，跨境上新的瓶颈就从语言转移到了品牌资产管理。</description>
+    </item>
+    <item>
+      <title>论文带读 · Building Effective Agents（Anthropic）</title>
+      <link>https://midea-ai-lab.example.com/#readings/0</link>
+      <guid isPermaLink="false">midea-ai-lab-readings-building-effective-agents</guid>
+      <pubDate>Wed, 07 May 2026 09:00:00 +0800</pubDate>
+      <description>Anthropic 在 2024.12 发布的代理工程奠基文。中英对照精读，含动图演示。</description>
+    </item>
+
+    <!-- 历史归档 · 仅元数据 -->
+    <item>
+      <title>每周大事件 · 第 18 周（2026.04.27—05.03）</title>
+      <link>https://midea-ai-lab.example.com/#weekly/2026-w18</link>
+      <guid isPermaLink="false">midea-ai-lab-weekly-2026-w18</guid>
+      <pubDate>Sun, 03 May 2026 22:00:00 +0800</pubDate>
+      <description>GPT-5 Turbo 公测 · OpenSora-2 开源 · H-Mem · 白宫 AI 行动报告 · Anthropic 扩编 Agent 安全。</description>
+    </item>
+    <item>
+      <title>每周大事件 · 第 17 周（2026.04.20—04.26）</title>
+      <link>https://midea-ai-lab.example.com/#weekly/2026-w17</link>
+      <guid isPermaLink="false">midea-ai-lab-weekly-2026-w17</guid>
+      <pubDate>Sun, 26 Apr 2026 22:00:00 +0800</pubDate>
+      <description>DeepSeek V4 开源 · Cursor Background Agents · Constitutional Classifiers · 加州 SB-1047 重启 · TikTok Shop AI Showcase。</description>
+    </item>
+    <item>
+      <title>每周大事件 · 第 16 周（2026.04.13—04.19）</title>
+      <link>https://midea-ai-lab.example.com/#weekly/2026-w16</link>
+      <guid isPermaLink="false">midea-ai-lab-weekly-2026-w16</guid>
+      <pubDate>Sun, 19 Apr 2026 22:00:00 +0800</pubDate>
+      <description>Gemini 2.5 + Workspace · Llama-4 开源 · MoE × 投机解码 · 欧盟 AI Act 全面适用首周 · Stripe 收购 Lithic。</description>
+    </item>
+  </channel>
+</rss>

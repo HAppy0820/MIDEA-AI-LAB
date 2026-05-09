@@ -138,6 +138,7 @@ function parseDataJs(txt){
     if(Array.isArray(w.TIMELINE)) state.data.TIMELINE = w.TIMELINE;
     if(w.WEEKLY) state.data.WEEKLY = w.WEEKLY;
     if(Array.isArray(w.ESSAYS)) state.data.ESSAYS = w.ESSAYS;
+    if(Array.isArray(w.READINGS)) state.data.READINGS = w.READINGS;
   } catch(e){ throw new Error('解析 data.js 失败：'+e.message); }
 }
 
@@ -146,6 +147,7 @@ function serializeDataJs(){
   const T = JSON.stringify(state.data.TIMELINE, null, 2);
   const W = JSON.stringify(state.data.WEEKLY, null, 2);
   const E = JSON.stringify(state.data.ESSAYS, null, 2);
+  const R = JSON.stringify(state.data.READINGS||[], null, 2);
   return `/* ─────────────────────────────────────────────────────────
    Content data — managed by /admin. Last save: ${new Date().toISOString()}
    ───────────────────────────────────────────────────────── */
@@ -164,6 +166,11 @@ window.WEEKLY = ${W};
    3. AI × 跨境电商 · 思考存档
    ============================================================ */
 window.ESSAYS = ${E};
+
+/* ============================================================
+   4. MR.PP 论文带读
+   ============================================================ */
+window.READINGS = ${R};
 `;
 }
 
@@ -201,6 +208,21 @@ async function downloadDataJs(){
   const a = document.createElement('a');
   a.href = url; a.download = 'data.js'; a.click();
   setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+
+/* ─── Fetch article text via Tavily extract ─── */
+async function fetchArticleText(url){
+  const c = state.cfg;
+  if(!c.tavilyKey) throw new Error('需要 Tavily Key 抓取原文');
+  const res = await fetch('https://api.tavily.com/extract', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ api_key: c.tavilyKey, urls: [url], extract_depth: 'advanced' }),
+  });
+  if(!res.ok) throw new Error('抓取失败 HTTP '+res.status);
+  const j = await res.json();
+  const r = (j.results||[])[0];
+  if(!r) throw new Error('抓取空结果');
+  return (r.raw_content || r.content || '').slice(0, 16000);
 }
 
 /* ─── Tavily search API ─── */
@@ -258,7 +280,7 @@ function bindNav(){
 function switchTab(tab){
   state.tab = tab;
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.tab===tab));
-  const renderers = { weekly: renderWeekly, essays: renderEssays, timeline: renderTimeline, settings: renderSettings };
+  const renderers = { weekly: renderWeekly, readings: renderReadings, essays: renderEssays, timeline: renderTimeline, settings: renderSettings };
   (renderers[tab]||renderWeekly)();
 }
 
@@ -324,6 +346,9 @@ function renderWeekly(){
       ]),
       h('button',{class:'btn ghost', onclick: ()=>{ document.getElementById('news-raw').value=''; }},'清空'),
     ]),
+    h('div',{style:'margin-top:10px;'},[
+      h('button',{class:'btn small', onclick: aiGenerateAllSvgs},'🎨 为所有事件批量生成配图'),
+    ]),
   ]);
   m.appendChild(ai);
 
@@ -366,7 +391,111 @@ function eventCard(ev, i){
   card.appendChild(field('一句话引导', ev.teaser, v=>{ev.teaser=v;markDirty();}));
   const bodyVal = (ev.body||[]).join('\n');
   card.appendChild(textareaField(null, bodyVal, v=>{ev.body=v.split('\n').filter(x=>x!==null); markDirty();}, 6, '正文，每行一段。可用空行分隔，前缀「• 」、「1. 」会保留。','正文'));
+  // SVG illustration row
+  const svgRow = h('div',{style:'margin-top:14px;border-top:1px dashed var(--border);padding-top:12px;'},[]);
+  svgRow.appendChild(h('div',{style:'display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;'},[
+    h('strong',{style:'font-size:13px;'},'AI 配图'),
+    h('span',{class:'tag',style:ev.svg?'background:#e8f0e4;color:#3d5a32;':'background:#f3eee0;color:#7a7363;'}, ev.svg?'已生成':'未生成'),
+    h('button',{class:'btn small', onclick:()=>aiGenerateOneSvg(i)}, ev.svg?'重新生成':'AI 生成配图'),
+    ev.svg?h('button',{class:'btn small ghost', onclick:()=>{delete ev.svg;markDirty();renderWeekly();}},'清除'):null,
+  ].filter(Boolean)));
+  if(ev.svg){
+    const prev = h('div',{style:'aspect-ratio:5/2.4;background:#FAF9F5;border:1px solid var(--border-faint);border-radius:6px;overflow:hidden;'},[]);
+    prev.innerHTML = ev.svg;
+    const s = prev.querySelector('svg'); if(s){ s.style.width='100%'; s.style.height='100%'; }
+    svgRow.appendChild(prev);
+  }
+  card.appendChild(svgRow);
   return card;
+}
+
+/* ─── AI generate SVG illustration ─── */
+const SVG_STYLE_PROMPT = `你是一位极简编辑设计师，为「美的 AI 实验室」每周 AI 大事件卡片生成 SVG 配图。**严格遵守以下设计规范**：
+
+【画布】
+- viewBox="0 0 500 240"，标准 5:2.4 横版
+- 背景透明（不要画外框矩形）
+
+【颜色（只能用这几个）】
+- 珊瑚强调色 #cc785c（主要点睛，1-2 处）
+- 深棕 #3d3729（标题文字、关键描边）
+- 中性灰棕 #7a7363（次要文字）
+- 浅灰 #a39e8d（标签文字）
+- 米色边线 #d4cfbe（结构线）
+- 极浅米 #e8e3d2（分割线）
+- 背景白米 #faf9f5（仅作为元素填充背景）
+
+【字体】
+- 等宽: font-family="Source Code Pro,monospace" — 用于英文标签、数字、代码、metric
+- 衬线: font-family="Noto Serif SC,serif" — 用于中文小标题、关键短语
+- 字号 9-14px，标签字加 letter-spacing="1.5"
+
+【构图原则】
+- 一张图一个核心隐喻（不要堆砌）
+- 大量留白，元素居中或左右对称
+- 用细线（stroke-width=1.25 或 1.5）勾勒结构，不要粗线条
+- 数字/数据要可读（"30%"、"200K"、"$0.03"等）
+- 必须包含至少 1 个珊瑚色 #cc785c 元素作为视觉焦点
+- 可以用简单的 <animate> 让一个元素动起来（fill 渐变、宽度增长、不透明度脉动），但不要过度
+- 不要用渐变填充、阴影、滤镜
+- 不要画卡通图标、emoji、人物
+- 风格参考：Stripe Press / Pitchfork 排版插画 / 学术论文示意图
+
+【常用元素库（可直接使用）】
+- 进度条：<rect> 描边外框 + <rect> 珊瑚色填充
+- 数据点矩阵：<circle r="2"> 网格，可加脉动动画
+- 流程箭头：<path stroke-dasharray="3 3"> + <polygon> 三角箭头
+- 节点树：<path> 折线连接 + <circle> 端点
+- 数据卡片：<rect rx="4"> 米色描边 + 内部文字
+- 五角星：M 0 -8 L 2 -2 L 8 -2 L 3 2 L 5 8 L 0 4 L -5 8 L -3 2 L -8 -2 L -2 -2 Z
+
+【输出格式】
+- 直接返回完整的 <svg>...</svg> 字符串，不要任何前后说明文字、不要 markdown 代码块
+- viewBox 必须是 "0 0 500 240"
+- 必须包含 xmlns="http://www.w3.org/2000/svg"
+
+【内容要求】
+- 图必须直接呼应这条新闻的具体数据/概念
+- 至少出现一个具体数字或英文术语（从新闻里提取）
+- 至少一行中文小字（4-10 字，从新闻关键词提取）`;
+
+async function aiGenSvgForEvent(ev){
+  const newsCtx = `类别：${ev.kind}\n标题：${ev.title}\n引导：${ev.teaser}\n正文：${(ev.body||[]).join(' ')}`;
+  const out = await callDeepSeek([
+    { role:'system', content: SVG_STYLE_PROMPT },
+    { role:'user', content: '请为这条新闻生成 SVG 配图：\n\n' + newsCtx },
+  ], { temperature: 0.4, max_tokens: 3500 });
+  // Extract <svg>...</svg>
+  const m = out.match(/<svg[\s\S]*?<\/svg>/i);
+  if(!m) throw new Error('AI 未返回有效 SVG');
+  return m[0];
+}
+
+async function aiGenerateOneSvg(idx){
+  const ev = state.data.WEEKLY.events[idx];
+  if(!ev){ return; }
+  if(!state.cfg.dsKey){ toast('请先填 DeepSeek Key','error'); return; }
+  toast(`正在为「${ev.title||'事件 '+(idx+1)}」生成配图...`,'info');
+  try {
+    const svg = await aiGenSvgForEvent(ev);
+    ev.svg = svg;
+    markDirty(); renderWeekly();
+    toast('✓ 配图已生成','success');
+  } catch(e){ console.error(e); toast('生成失败：'+e.message,'error'); }
+}
+
+async function aiGenerateAllSvgs(){
+  if(!state.cfg.dsKey){ toast('请先填 DeepSeek Key','error'); return; }
+  const evs = state.data.WEEKLY.events;
+  if(!evs.length){ toast('当前没有事件','error'); return; }
+  toast(`开始为 ${evs.length} 条事件生成配图（约 ${evs.length*6} 秒）...`,'info', 4000);
+  let ok=0, fail=0;
+  for(let i=0;i<evs.length;i++){
+    try { evs[i].svg = await aiGenSvgForEvent(evs[i]); ok++; saveDraft(); }
+    catch(e){ console.error(e); fail++; }
+  }
+  renderWeekly();
+  toast(`完成：${ok} 张成功，${fail} 张失败`, ok>0?'success':'error', 5000);
 }
 
 /* ─── AI organize weekly ─── */
@@ -387,7 +516,7 @@ async function aiOrganizeWeekly(){
       "kind": "类别（从这几个选：模型升级 / 开源项目 / 新概念 / 政策 / 公司动态）",
       "title": "新闻标题（中文，简洁有力，<= 26 字）",
       "teaser": "一句话引导（中文，30-60 字，要让读者一眼想点开）",
-      "glyph": "图标关键词，从这几个选：pulse / branch / spark / shield / box / star / globe",
+      "glyph": "图标关键词，必须与 kind 严格对应：模型升级→pulse / 开源项目→branch / 新概念→spark / 研究→spark / 政策→shield / 公司动态→box / 行业→box",
       "body": [
         "正文段落 1（中文，2-4 句）",
         "正文段落 2",
@@ -422,13 +551,105 @@ async function aiOrganizeWeekly(){
     state.data.WEEKLY.events = json.events.slice(0,8);
     markDirty();
     renderWeekly();
-    toast(`AI 已整理 ${json.events.length} 条卡片，请审核`, 'success');
+    toast(`AI 已整理 ${json.events.length} 条卡片，正在生成配图...`, 'success');
+    // Auto-generate SVG illustrations for each event
+    await aiGenerateAllSvgs();
   } catch(e){
     console.error(e);
     toast('AI 整理失败：'+e.message,'error');
   } finally {
     if(spin) spin.style.display='none';
   }
+}
+
+/* ─── AI generate inline SVG for a single weekly event ─── */
+const SVG_STYLE_PROMPT_V2 = `你是为 Midea AI Lab AI 周报绘制示意图的编辑插画师，参考 Stratechery / Anthropic Claude 的克制审美。
+
+输出契约（严格遵守）：
+- 只输出一段 <svg>…</svg>，不要 markdown、不要解释、不要 <?xml> 头
+- 根标签必须是 <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">，所有坐标在 0..500 × 0..240
+- 不要写 width/height 属性；不要外部资源；不要 <script>/<style>/<foreignObject>/<image>
+- 总长度 ≤ 1800 字符
+
+调色板（只用这些颜色，不准引入其他颜色）：
+- 珊瑚主色 #CC785C （opacity 0.12-0.18 用于填充淡色块；满色仅一处用于核心要素）
+- 墨色 #3D3729 主线条与关键文字
+- 次墨 #7A7363 次要文字
+- 哑墨 #A39E8D 元信息/小标签
+- 边框 #D4CFBE 中性描边
+- 浅边框 #E8E3D2 背景分隔线
+- 背景透明（卡片本身是 #FAF9F5 暖米色，不要画背景矩形）
+
+字体（仅这两种）：
+- 标题/数字：font-family="Noto Serif SC, serif" 13-15 号，#3D3729
+- 代码标签/单位：font-family="Source Code Pro, monospace" 9-11 号，#A39E8D 或 #7A7363，letter-spacing="1.5" 到 "2"，英文大写
+
+线条 1 到 1.5 px，stroke-linecap="round"；圆角 rx 4-10；可用 stroke-dasharray="3 3" 表示推断/流向。
+布局：单一主体居中或偏左，左上一行小写英文大写 mono 上下文标签，底部 ~y=200 一行中文 serif 写一个具体事实/数字。负空间是特性。
+
+可选动画：必要时用 <animate> 表达"扩张/对比/演化"，最多一个动画想法，不要闪烁。
+
+按新闻类别选模式：
+- 模型升级 → 增长的条/扩张的窗口/前后规格线
+- 开源项目 → 分叉的树状节点 + 代码标签筹码 + 一颗星与数字
+- 新概念/研究 → 多个小点经过箭头压缩为少数节点 + 流程图
+- 政策 → 盾牌/文件/印章 + mono 元信息
+- 公司动态/行业 → 手机或浏览器框 + 对话气泡 / 市场示意
+- Agent/工具 → 中心节点 + 周围带标签的工具筹码
+
+禁止：emoji、渐变、阴影、filter、3D/等距、灯泡/大脑/机器人/齿轮/火箭老套元素、纯装饰图形、超过一个满色珊瑚填充。每个元素必须映射到新闻里某个具体事实（数字、名称、对比）。`;
+
+async function aiGenerateSvgFor(event){
+  const userMsg = `请为下面这条 AI 新闻卡片生成示意图：
+类别：${event.kind}
+标题：${event.title}
+引导：${event.teaser}
+正文要点：${(event.body||[]).slice(0,3).join(' / ')}
+
+抓取一个最具体的数字或事实作为画面焦点（例如上下文长度、模型版本号、星标数、罚款额、参与方），以此组织构图。`;
+  const out = await callDeepSeek([
+    { role:'system', content: SVG_STYLE_PROMPT_V2 },
+    { role:'user', content: userMsg },
+  ], { temperature: 0.4, max_tokens: 2400 });
+  // Extract <svg>…</svg>
+  const m = out.match(/<svg[\s\S]*?<\/svg>/i);
+  if(!m) throw new Error('SVG 未在返回中找到');
+  let svg = m[0];
+  // Sanity guardrails
+  svg = svg.replace(/<script[\s\S]*?<\/script>/gi,'');
+  svg = svg.replace(/on[a-z]+="[^"]*"/gi,'');
+  if(svg.length > 6000) throw new Error('SVG 超长');
+  return svg;
+}
+
+async function aiGenerateAllSvgs(){
+  const events = state.data.WEEKLY.events || [];
+  if(!events.length){ toast('没有事件卡片，先填内容','error'); return; }
+  if(!state.cfg.dsKey){ toast('请先在「设置」填 DeepSeek Key','error'); return; }
+  let ok = 0, fail = 0;
+  for(let i=0;i<events.length;i++){
+    try {
+      toast(`正在生成第 ${i+1}/${events.length} 张配图…`, 'info', 1800);
+      events[i].svg = await aiGenerateSvgFor(events[i]);
+      ok++;
+      // Re-render so user sees progress
+      if(state.tab === 'weekly') renderWeekly();
+    } catch(e){ console.warn('SVG 生成失败 #'+(i+1), e); fail++; }
+  }
+  markDirty();
+  toast(`配图生成完成 · 成功 ${ok} · 失败 ${fail}`, fail?'error':'success');
+}
+
+async function aiGenerateOneSvg(idx){
+  const ev = state.data.WEEKLY.events[idx];
+  if(!ev) return;
+  if(!state.cfg.dsKey){ toast('请先在「设置」填 DeepSeek Key','error'); return; }
+  try {
+    toast('正在生成配图…','info');
+    ev.svg = await aiGenerateSvgFor(ev);
+    markDirty(); renderWeekly();
+    toast('配图已生成','success');
+  } catch(e){ toast('生成失败：'+e.message,'error'); }
 }
 
 /* ─── AI auto-search weekly via Tavily + DeepSeek ─── */
@@ -463,6 +684,120 @@ async function aiAutoSearchWeekly(){
   } catch(e){ console.error(e); toast('自动搜索失败：'+e.message,'error'); }
   finally { spin.style.display='none'; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   TAB · Readings (MR.PP 论文带读 · 一周一更)
+   ═══════════════════════════════════════════════════════════ */
+function renderReadings(){
+  clearMain();
+  pageHead('04 · READINGS', 'MR.PP 论文带读', '每周一更。粘贴一个原文链接 → DeepSeek 自动抓取 + 按精读 schema 输出，你审核 + 保存。');
+  const m = document.getElementById('main');
+  if(!state.data.READINGS) state.data.READINGS = window.READINGS || [];
+
+  // AI helper — single article
+  m.appendChild(h('div',{class:'ai-panel'},[
+    h('h4',{},[h('span',{class:'dot'}), document.createTextNode('MR.PP · 自动解读单篇文章')]),
+    h('p',{html:'粘贴一个 AI 博客 / 论文链接（Anthropic、OpenAI、DeepMind、机器之心英文版等）。<strong>需要先在设置里配好 Tavily 和 DeepSeek</strong>。'}),
+    field('原文 URL', '', v=>{ window._mrUrl=v.trim(); }, '如 https://www.anthropic.com/research/...'),
+    h('div',{class:'row'},[
+      selectField('来源', 'ANTHROPIC', ['ANTHROPIC','OPENAI','DEEPMIND','DEEPSEEK','META','OTHER'], v=>{ window._mrSource=v; }),
+      field('本周次', `第 ${currentWeekNum()} 周 · ${todayYYYYMM()}`, v=>{ window._mrWeek=v; }),
+    ]),
+    h('div',{style:'display:flex;gap:10px;flex-wrap:wrap;'},[
+      h('button',{class:'btn primary', onclick: aiGenerateReading},[
+        h('span',{class:'spin', id:'reading-spin', style:'display:none;'}),
+        document.createTextNode('  MR.PP 自动解读'),
+      ]),
+      h('button',{class:'btn', onclick: aiAutoFindAndRead},[
+        h('span',{class:'spin', id:'auto-find-spin', style:'display:none;'}),
+        document.createTextNode('  🌐 自动搜本周热门 + 解读'),
+      ]),
+    ]),
+  ]));
+
+  // List existing
+  (state.data.READINGS||[]).forEach((r, i) => m.appendChild(readingCard(r, i)));
+  m.appendChild(saveBar('保存到 GitHub（论文带读）'));
+}
+
+function readingCard(r, i){
+  const card = h('div',{class:'card'},[]);
+  card.appendChild(h('div',{class:'card-head'},[
+    h('h3',{},'#'+(i+1)+' · '+(r.titleCn||r.title||'')),
+    h('button',{class:'btn small danger', onclick:()=>{ if(confirm('删除这篇带读？')){state.data.READINGS.splice(i,1);markDirty();renderReadings();} }},'删除'),
+  ]));
+  card.appendChild(h('div',{class:'row3'},[
+    field('id', r.id||'', v=>{r.id=v;markDirty();}),
+    field('来源', r.source||'', v=>{r.source=v;markDirty();}),
+    field('周次', r.week||'', v=>{r.week=v;markDirty();}),
+  ]));
+  card.appendChild(field('标题（中文）', r.titleCn||'', v=>{r.titleCn=v;markDirty();}));
+  card.appendChild(field('标题（英文）', r.title||'', v=>{r.title=v;markDirty();}));
+  card.appendChild(field('原文 URL', r.sourceUrl||'', v=>{r.sourceUrl=v;markDirty();}));
+  card.appendChild(textareaField(null, r.tldr||'', v=>{r.tldr=v;markDirty();}, 3, '一句话总结','TLDR'));
+  card.appendChild(textareaField(null, JSON.stringify(r.pyramid||{},null,2), v=>{ try{r.pyramid=JSON.parse(v);markDirty();}catch(e){} }, 8, '金字塔结构 JSON','Pyramid (JSON)'));
+  card.appendChild(textareaField(null, JSON.stringify(r.sections||[],null,2), v=>{ try{r.sections=JSON.parse(v);markDirty();}catch(e){} }, 14, '5 节正文 JSON。每节字段：h, en, cn, note, demoId?, think?, quiz?, compare?','Sections (JSON)'));
+  card.appendChild(textareaField(null, JSON.stringify(r.glossary||[],null,2), v=>{ try{r.glossary=JSON.parse(v);markDirty();}catch(e){} }, 6, '术语表 JSON','Glossary (JSON)'));
+  card.appendChild(textareaField(null, JSON.stringify(r.further||[],null,2), v=>{ try{r.further=JSON.parse(v);markDirty();}catch(e){} }, 5, '延伸阅读 JSON','Further (JSON)'));
+  return card;
+}
+
+async function aiGenerateReading(){
+  const url = window._mrUrl;
+  if(!url){ toast('请先填 URL','error'); return; }
+  const skill = window.READING_SKILL;
+  if(!skill){ toast('skill 未加载','error'); return; }
+  const spin = document.getElementById('reading-spin'); spin.style.display='inline-block';
+  try {
+    toast('🌐 抓取原文中...','info');
+    const json = await skill.generate(
+      url,
+      callDeepSeek,
+      fetchArticleText,
+      { source: window._mrSource||'OTHER', week: window._mrWeek||'', date: new Date().toISOString().slice(0,10) },
+    );
+    json.sourceUrl = url;
+    if(!state.data.READINGS) state.data.READINGS = [];
+    state.data.READINGS.unshift(json);
+    markDirty();
+    renderReadings();
+    toast('✓ MR.PP 解读完成，请审核','success');
+  } catch(e){ console.error(e); toast('解读失败：'+e.message,'error',5000); }
+  finally { spin.style.display='none'; }
+}
+
+async function aiAutoFindAndRead(){
+  if(!state.cfg.tavilyKey){ toast('请先填 Tavily Key','error'); return; }
+  const skill = window.READING_SKILL;
+  const spin = document.getElementById('auto-find-spin'); spin.style.display='inline-block';
+  try {
+    toast('🌐 搜本周热门 AI 博客...','info');
+    const all = [];
+    for(const q of skill.weeklySearchQueries.slice(0,3)){
+      try { const rs = await tavilySearch(q, { days: 7, max_results: 5, topic: 'general' }); all.push(...rs); }
+      catch(e){ console.warn(e); }
+    }
+    const seen = new Set(); const uniq = all.filter(r=>{ if(seen.has(r.url)) return false; seen.add(r.url); return true; });
+    if(!uniq.length) throw new Error('没搜到候选文章');
+    // Let user pick
+    const chosen = prompt(`搜到 ${uniq.length} 篇，请输入要解读的编号（1-${Math.min(uniq.length,8)}）：\n\n` +
+      uniq.slice(0,8).map((r,i)=>`${i+1}. ${r.title}\n   ${r.url}`).join('\n\n'));
+    const idx = parseInt(chosen,10)-1;
+    if(isNaN(idx) || !uniq[idx]) return;
+    window._mrUrl = uniq[idx].url;
+    const u = new URL(uniq[idx].url);
+    window._mrSource = (u.hostname.includes('anthropic')?'ANTHROPIC':u.hostname.includes('openai')?'OPENAI':u.hostname.includes('deepmind')?'DEEPMIND':u.hostname.includes('deepseek')?'DEEPSEEK':u.hostname.includes('meta')?'META':'OTHER');
+    window._mrWeek = `第 ${currentWeekNum()} 周 · ${todayYYYYMM()}`;
+    await aiGenerateReading();
+  } catch(e){ console.error(e); toast('自动搜索失败：'+e.message,'error'); }
+  finally { spin.style.display='none'; }
+}
+
+function currentWeekNum(){
+  const now = new Date(); const start = new Date(now.getFullYear(),0,1);
+  return Math.ceil((((now-start)/86400000)+start.getDay()+1)/7);
+}
+function todayYYYYMM(){ const d = new Date(); return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0'); }
 
 /* ═══════════════════════════════════════════════════════════
    TAB · Essays
@@ -616,7 +951,7 @@ function renderSettings(){
     h('div',{class:'card-head'},[ h('h3',{},'DeepSeek API'), h('span',{class:'tag'},'D1 AI 抓取') ]),
     h('p',{class:'field-hint',style:'margin-bottom:14px;', html:'• 在 <a href="https://platform.deepseek.com/api_keys" target="_blank">DeepSeek 控制台</a> 申请 API Key。<br>• <strong>注意</strong>：DeepSeek API 本身不能联网搜索。"AI 整理"是把你<strong>粘贴的素材</strong>整理成卡片——你需要自己先收集本周新闻（网页、Twitter、YouTube 摘要），粘进去后让 AI 帮你格式化。'}),
     field('API Key', c.dsKey, v=>{c.dsKey=v.trim();saveCfg();}, '以 sk- 开头', 'password'),
-    selectField('模型', c.dsModel||'deepseek-chat', ['deepseek-chat','deepseek-reasoner'], v=>{c.dsModel=v;saveCfg();}),
+    selectField('模型', c.dsModel||'deepseek-chat', ['deepseek-chat','deepseek-v4','deepseek-v4-pro','deepseek-reasoner'], v=>{c.dsModel=v;saveCfg();}),
     h('button',{class:'btn small', onclick: testDeepSeek, style:'margin-top:8px;'},'测试连接'),
   ]));
 

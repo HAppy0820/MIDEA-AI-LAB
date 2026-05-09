@@ -78,6 +78,48 @@
 
 ---
 
+## 第三点六部分 · 半自动周更（推荐）
+
+让 GitHub 每周日晚自己跑搜索 + 整理 + 推 PR + 发邮件给你审核。你周一早 8 点收到邮件，看一眼，点 Merge 就上线。
+
+**前置：** Resend 账号（发邮件，免费 100 封/天）+ 已经有 Tavily Key + DeepSeek Key。
+
+### 1. 注册 Resend
+- 打开 [resend.com](https://resend.com) → Sign Up → 用 GitHub 登录就行
+- 进 Dashboard → **API Keys** → **Create API Key** → 任意起名 → 复制 `re_xxx` 开头的 Key
+
+### 2. 在 GitHub repo 设置 Secrets
+
+进 repo → **Settings → Secrets and variables → Actions → New repository secret**，添加四个：
+
+| Name | Value |
+|---|---|
+| `TAVILY_API_KEY`   | 你的 Tavily Key |
+| `DEEPSEEK_API_KEY` | 你的 DeepSeek Key |
+| `RESEND_API_KEY`   | 上一步的 Resend Key |
+| `NOTIFY_EMAIL`     | 你想接收草稿的邮箱（如 `you@qq.com`） |
+
+### 3. 完成
+
+`.github/workflows/weekly-draft.yml` 已经在 repo 里。下次周日 22:00（北京时间）GitHub 会自动：
+1. 运行 `scripts/weekly-draft.mjs`：Tavily 搜过去 7 天 5 大类 AI 事件 → DeepSeek 整理为 5 条卡片 → 把当前 WEEKLY 推入 archive，写入新 WEEKLY
+2. 自动开一条 PR，分支名 `weekly-draft-2026-w19`
+3. 用 Resend 发一封邮件给 `NOTIFY_EMAIL`，含 PR 链接 + 5 条标题预览
+
+### 4. 你的操作
+
+周一早 8 点收到邮件 →
+
+- **内容 OK** → 点邮件里的 PR 链接 → GitHub 上点 **Merge** → Vercel 1-2 分钟自动部署 → 上线
+- **想改** → 直接打开后台 `/admin/index.html` 改完保存（推到 main，PR 自动失效）
+- **不想发** → PR 里点 **Close**，本周跳过
+
+### 5. 手动触发（测试用）
+
+不想等到周日？进 repo → **Actions → Weekly Draft → Run workflow**，立即跑一次。
+
+---
+
 ## 第四部分 · 每周更新流程
 
 ### 假设是周日晚上：

@@ -1,28 +1,691 @@
 /* ─────────────────────────────────────────────────────────
-   Content data — managed by /admin. Last save: 2026-05-09T06:24:16.338Z
+   Content data — edit here every week to update the site.
    ───────────────────────────────────────────────────────── */
 
 /* ============================================================
    1. AI 技术发展史 · 时间树
    ============================================================ */
-window.TIMELINE = [];
+window.TIMELINE = [
+  {
+    year: 1950, era: '萌芽',
+    title: '图灵测试',
+    subtitle: 'Alan Turing — "Can Machines Think?"',
+    summary: '图灵在论文《Computing Machinery and Intelligence》中提出"模仿游戏"：一个人无法分辨屏幕背后是人还是机器时，就可以说机器具备了智能。',
+    plain: '在还没有"个人电脑"这种东西的 1950 年，图灵在英国曼彻斯特大学问了一个让全世界发愣的问题：<strong>"机器能不能思考？"</strong>他知道这个问题没法直接回答——你怎么定义"思考"呢？于是他换了个聪明的问法。',
+    analogy: '想象你在微信上和两个人聊天，对方在另一个房间打字回你。聊了半小时，你被告知其中一个是人，另一个是程序。如果你猜错或者干脆猜不出来——图灵说，那这个程序就算"会思考"了。<br><br>这就像你判断一个外国朋友是不是真的懂中文：不看他的脑子怎么转，看他能不能在聊天里骗过你。',
+    mechanism: '图灵的天才在于：他<strong>把"智能"这个抽象概念，换算成了一个可操作的考试</strong>。从此 AI 研究有了具体目标——不是研究"思考是什么"，而是造出一台能在文字交流中冒充人的机器。今天的 ChatGPT、Claude，本质上都还在挑战 75 年前的这个考试题。',
+    impact: '这篇论文为整个 AI 领域确立了"以人类表现为基准"的衡量标准。它也成为科幻片《2001 太空漫游》《银翼杀手》《Her》的哲学源头。2014 年，一个伪装成 13 岁乌克兰男孩的程序 Eugene Goostman 据称首次"通过"图灵测试，引发广泛争议。',
+    tag: '理论',
+  },
+  {
+    year: 1956, era: '萌芽',
+    title: '达特茅斯会议',
+    subtitle: '"Artificial Intelligence" 一词诞生',
+    summary: 'McCarthy、Minsky、Shannon 等人在达特茅斯学院召开两个月研讨会，第一次正式使用 Artificial Intelligence 这个词，AI 作为一门学科正式成立。',
+    plain: '1956 年的夏天，新罕布什尔州一个安静的大学校园里，10 位年轻学者凑在一起开了个为期两个月的"夏令营"。他们带着一个野心勃勃的提议——<strong>"机器智能的每一个方面，原则上都可以被精确描述，从而让机器去模拟它"</strong>。这场会议结束时，"人工智能"这个词正式诞生。',
+    analogy: '这就像几个朋友在咖啡馆决定给一种正在萌芽的运动起个名字。在这之前，研究者各自在做"控制论"、"自动机理论"、"复杂信息处理"——名字五花八门。开完这个会，<strong>大家终于在同一面旗子下面集合了</strong>。',
+    mechanism: '会议召集人 John McCarthy（后来发明了 Lisp 语言）、Marvin Minsky（MIT AI 实验室创始人）、Claude Shannon（信息论之父）这三位之后影响了整个学科 50 年。会议设定了 AI 的七大核心问题：自然语言、神经网络、计算理论、自我改进、抽象、随机性、创造力——直到今天我们还在攻克其中某些问题。',
+    impact: 'AI 成为正式学科，开启了 1950s—1970s 的第一波研究热潮。但当时的乐观估计（"20 年内造出和人类智能相当的机器"）远远落空，导致了 1970s 和 1980s 两次"AI 寒冬"——研究经费冻结、整个领域被嘲笑了 20 年。',
+    tag: '里程碑',
+  },
+  {
+    year: 1997, era: '专家系统',
+    title: '深蓝击败卡斯帕罗夫',
+    subtitle: 'Deep Blue · IBM',
+    summary: 'IBM 的国际象棋专用机 Deep Blue 以 3.5 : 2.5 战胜世界冠军 Kasparov，成为第一个在标准比赛条件下击败人类世界冠军的计算机。',
+    plain: '1997 年 5 月 11 日，纽约一栋大楼里，国际象棋世界冠军 Garry Kasparov 站起来推翻棋子，气得离场。和他对弈的不是另一位大师，而是<strong>一个比冰箱还大的金属柜子——IBM 的 Deep Blue</strong>。这是历史上第一次，一台机器在标准比赛条件下击败了人类世界冠军。',
+    analogy: '这台机器其实并不"聪明"，它的方法非常笨：<strong>每秒计算 2 亿种可能的走法</strong>，把未来 12-20 步的所有局面都推演一遍，然后挑分数最高的那步。<br><br>就像让一个完全不会下棋的人，靠在脑子里穷举接下来 1000 万种走法来打败你——只要他算得够快，他就能赢。这种暴力计算 + 专家规则的方法叫做"专家系统"。',
+    mechanism: '深蓝里塞了 480 个专用国际象棋芯片，加上一本由特级大师维护的"开局库"和"残局库"。它不会泛化——你让它去下围棋、聊天、识别图片，它什么都不会。它是为一件事专门打造的怪物。',
+    impact: '《纽约时报》头版："人类时代的终结"。"机器要取代人类"第一次成为公共话题。但学界的反思也很清醒：深蓝赢了象棋，并不代表 AI 真的会思考——它只是在一个规则极其清晰的小宇宙里跑得比人快。真正的 AI 突破还要再等 15 年。',
+    tag: '突破',
+  },
+  {
+    year: 2012, era: '深度学习',
+    title: 'AlexNet · 深度学习革命',
+    subtitle: 'ImageNet 竞赛 Top-5 错误率 15.3%',
+    summary: 'Hinton 团队的卷积神经网络 AlexNet 在 ImageNet 大赛中以 10 个百分点的优势碾压所有传统方法，深度学习正式登上历史舞台。',
+    plain: '2012 年 9 月 30 日，多伦多大学一个研究生 Alex Krizhevsky 提交了一份图像识别比赛的成绩单——<strong>错误率 15.3%，第二名 26.2%</strong>。在这个领域，每年大家挤破头降低 1 个点。AlexNet 一夜之间领先了 10 个点。整个学术圈炸了。',
+    analogy: '过去的图像识别是这样工作的：工程师手写规则——"猫的耳朵是三角形"、"轮廓有这种边缘"——一条条教给程序。但世界上的猫长得千奇百怪，规则永远写不完。<br><br>AlexNet 不一样：<strong>它把 100 万张照片喂给一个模仿大脑神经元的网络，让它自己摸索"猫长什么样"</strong>。就像你不需要给小孩讲"猫的定义"，让他看够多猫，他自己就认得。',
+    mechanism: 'AlexNet 有 8 层"神经网络"——每一层把图像的一些原始像素，识别出更抽象的特征：第 1 层识别"边和角"，第 3 层识别"纹理"，第 5 层识别"物体的局部"，最后一层综合判断"这是只猫"。关键的硬件创新是<strong>用 NVIDIA 的游戏显卡（GPU）来训练</strong>——比 CPU 快 50 倍。这是 NVIDIA 帝国崛起的起点。',
+    impact: 'Google 第二天就把整个研究方向转向深度学习；Facebook 三个月内挖来 Yann LeCun 创建 FAIR；百度成立深度学习研究院；NVIDIA 从一家游戏显卡公司，开始成长为今天的 AI 算力霸主。深度学习从此统治了 AI 领域 13 年。',
+    tag: '革命',
+  },
+  {
+    year: 2016, era: '深度学习',
+    title: 'AlphaGo 击败李世石',
+    subtitle: 'DeepMind · 4 : 1',
+    summary: 'AlphaGo 将深度强化学习与蒙特卡洛树搜索结合，在被认为机器最难掌握的围棋上击败世界顶尖棋手李世石。',
+    plain: '2016 年 3 月，首尔。围棋这个被认为"机器至少还要 10 年才能征服"的游戏，被 DeepMind 的 AlphaGo 以 <strong>4:1</strong> 击败了世界顶尖棋手李世石。第二局第 37 手，AlphaGo 下出一手让全场解说员愣住的棋——人类两千年的棋谱里从未有过——后来被棋手称为<strong>"神之一手"</strong>。',
+    analogy: '围棋为什么比象棋难得多？<br>• 国际象棋：每步约 35 种选择，整盘约 80 步；<br>• 围棋：每步约 250 种选择，整盘约 150 步。<br><br>围棋一盘棋的可能性是 10 的 170 次方——<strong>比宇宙中所有原子加起来还多得多</strong>。深蓝的"暴力穷举"在围棋里完全行不通，因此过去大家相信围棋不可能被攻破。',
+    mechanism: 'AlphaGo 用了三个绝招：<br>① <strong>深度学习</strong>：先让它读 3000 万人类棋谱，学会"职业棋手大概会怎么下"。<br>② <strong>自我对弈</strong>：让两个 AlphaGo 对下几百万盘，从零摸索出超越人类的策略。<br>③ <strong>蒙特卡洛树搜索</strong>：每走一步，快速模拟未来几千种局面取平均胜率。<br>"神之一手"就是自我对弈中诞生的——人类从未想过，但数学上是最优的。',
+    impact: '中日韩主流媒体连续头版报道。中国柯洁第二年再战 AlphaGo 0:3 败北后流泪。<strong>这是 AI 第一次让普通大众感到"它真的在思考"</strong>。强化学习成为热门方向，DeepMind 之后的 AlphaFold 用同样思路破解了蛋白质折叠——一个困扰生物学界 50 年的难题。',
+    tag: '突破',
+  },
+  {
+    year: 2017, era: '深度学习',
+    title: 'Transformer 架构提出',
+    subtitle: 'Vaswani et al. · "Attention Is All You Need"',
+    summary: 'Google 团队提出完全基于"注意力机制"的 Transformer 架构，抛弃了循环网络。它是之后所有大模型（GPT、BERT、Claude、Gemini）的共同祖先。',
+    plain: '2017 年 6 月，Google 8 位研究员发了一篇看似平常的论文，标题挑衅地写着<strong>《Attention Is All You Need》</strong>。这 8 页纸提出的架构——Transformer——彻底改写了 AI 的方向。今天你用过的所有大模型，无一例外是它的后代。',
+    analogy: '过去的 AI 读句子像录像带——必须一帧一帧按顺序看。读到第 50 个词时，已经快忘了第 1 个词在说什么。<br><br>Transformer 让 AI 像<strong>你读一篇文章时一样</strong>——眼睛不会从头扫到尾，而是<strong>一眼看到整页，自动跳到关键词上</strong>。读到"它"这个字，你的注意力会自动连回前面的"小猫"——这就是"注意力机制"。',
+    mechanism: '具体一点说：句子里的每个词都会向其他所有词"提问"——"你和我有多相关？"。词与词之间形成一张密集的注意力网。<br>• "猫"会强烈关联"喵喵"、"毛茸茸"；<br>• "银行"在金融上下文里关联"利率"，在地理上下文里关联"河岸"。<br>这种机制让模型能并行处理整段文字（GPU 友好），也让模型有了真正的"长程记忆"。<strong>训练大模型从此变得可行</strong>。',
+    impact: '这篇 8 页论文是 21 世纪迄今最重要的 AI 论文，没有之一。GPT、BERT、Claude、Gemini、文心、通义、DeepSeek——全是它的后代。8 位作者后来全部离开 Google，创立了 OpenAI、Character.ai、Cohere、Adept 等公司。一篇论文催生了一个万亿美元产业。',
+    tag: '革命',
+  },
+  {
+    year: 2020, era: '大语言模型',
+    title: 'GPT-3 · 1750 亿参数',
+    subtitle: 'OpenAI · few-shot learning',
+    summary: 'OpenAI 发布 GPT-3。它第一次展示了"只要模型足够大、读过足够多文本，就会自己学会写代码、做翻译、答题"——不需要为每个任务重新训练。',
+    plain: '2020 年 5 月，OpenAI 发布了一个有 <strong>1750 亿参数</strong>的庞然大物 GPT-3——比前一代大了 100 倍。研究者本来以为它只会写得"流畅一点"。但当人们开始玩它，发现了让所有人傻眼的事情：<strong>它会的远不止写文章</strong>。',
+    analogy: '过去训练 AI 是"教什么会什么"——想让它翻译，得用一堆双语句子专门训练；想让它做数学，得用数学题训练。<br><br>GPT-3 颠覆了这个范式。它的训练只有一个简单任务：<strong>给定前面的文字，预测下一个词是什么</strong>。但当模型大到一定程度、读过整个互联网之后，奇迹发生了——你只要给它两个例子："英文 cat → 中文 猫，英文 dog → 中文 ___"，它会自己接出"狗"。它从来没被专门"教过"翻译，但它无师自通。',
+    mechanism: '研究者管这种现象叫<strong>"涌现能力"（emergent abilities）</strong>。当参数从 1 亿增加到 100 亿，能力是线性增长的。但跨过某个阈值（大约 700 亿—1000 亿）之后，<strong>许多能力会突然出现</strong>——做算术、写代码、总结文章、推理因果——之前一点苗头都没有，跨过门槛后就有了。这是过去 70 年所有 AI 范式都不曾有过的现象。',
+    impact: '"涌现能力"成为研究热点。资本疯狂涌入大模型训练；中美算力竞赛正式开始；微软随后投资 OpenAI 100 亿美元。"参数越大越聪明"成为共识，全世界开始堆砌算力。一个看似无聊的"预测下一个词"的任务，意外打开了通用智能的大门。',
+    tag: '里程碑',
+  },
+  {
+    year: 2022, era: '大语言模型',
+    title: 'ChatGPT 上线',
+    subtitle: 'OpenAI · 五天破百万用户',
+    summary: 'OpenAI 把 GPT-3.5 包装成对话产品发布，5 天破百万、2 个月破亿，是历史上增长最快的消费级应用。',
+    plain: '2022 年 11 月 30 日，OpenAI 在自己网站挂了一个简陋的对话页面——白底黑字，一个输入框。研究人员本来当作内部测试发布。结果：<strong>5 天破 100 万用户，2 个月破 1 亿</strong>。Instagram 用了 2 年半，TikTok 用了 9 个月。ChatGPT 成为了人类历史上增长最快的消费级应用。',
+    analogy: 'GPT-3 的能力其实早就有了，但只有程序员会用 API 调它——你得写代码、设参数、调 prompt。<br><br>ChatGPT 做的事，就像<strong>把一台超级跑车的引擎装进了普通家用车</strong>。引擎没变（GPT-3.5），但所有人——你妈妈、你舅舅、保安大叔——只要会打字，都能直接和 AI 对话。"产品形态的胜利"在 AI 史上从未如此明显。',
+    mechanism: 'ChatGPT 比 GPT-3 多做了两件关键的事：<br>① <strong>RLHF（人类反馈强化学习）</strong>：让人类标注员对模型输出打分，训练模型偏向"有用、无害、诚实"。<br>② <strong>对话格式</strong>：模型被训练成保持上下文记忆的对话伙伴，而不是一次性补全工具。<br>这两件事让模型变得真正"好用"——它会拒绝危险请求、会承认错误、会问澄清问题。',
+    impact: 'Google 内部发布"Code Red"全员动员；微软追加投资 100 亿美元给 OpenAI；马斯克离开 OpenAI 后创办 xAI。中国"百模大战"启动——文心、通义、Kimi、智谱、Minimax、月之暗面、阶跃星辰，半年内冒出 100 多家大模型公司。各国政府开始严肃讨论 AI 监管。<strong>"AI 元年"被普遍认为是 2023</strong>——但起点是这一天。',
+    tag: '革命',
+  },
+  {
+    year: 2023, era: '大语言模型',
+    title: '多模态 · GPT-4 / Claude / 国产大模型',
+    subtitle: '看图、读文档、写代码',
+    summary: 'GPT-4、Claude 2、Gemini 等多模态模型相继发布，AI 不再只看文字，可以看图、读 PDF、看图表，能力接近甚至超过专业人士的水平。',
+    plain: '2023 年 3 月 14 日，GPT-4 发布。它能<strong>看图</strong>了——你拍一张冰箱内部的照片问它"今晚能做什么菜？"，它真的会列出菜单。同一年，Anthropic 的 Claude 2 把上下文扩展到 100K tokens——相当于一次能读完《哈利·波特》一整本。AI 第一次"长出眼睛"，并且有了"长期记忆"。',
+    analogy: '过去的 AI 像一个有学问但是<strong>瞎子加失忆症</strong>的助理：你必须把所有信息打成文字告诉他，他还只能记住最近 30 句话。<br><br>2023 年的 AI 突然<strong>能看了，也能记得久了</strong>。你可以把一份 100 页的 PDF 合同丢给它，它逐条找出风险点；你可以发一张电路图，它能解释每个元件作用；你可以拍一张孩子作业的照片，让它讲解错题。',
+    mechanism: '"多模态"指的是模型同时理解多种信息形式（文字 + 图像 + 音频 + 视频）。技术上，它把图像也"切成 token"——一张图被切成几百个小方块，每个方块编码成和文字一样的向量，喂给同一个 Transformer。模型不知道哪些 token 来自文字、哪些来自图像，对它来说都是"一串需要理解的符号"。这种统一表示，让<strong>"看图说话"和"读文回答"在底层是同一个能力</strong>。',
+    impact: 'AI 应用层创业潮爆发。Cursor、Copilot、Notion AI 进入企业生产环节。<strong>跨境电商在这一年开始批量使用 AI 写 listing、做翻译、生成产品图</strong>——这是美的电商团队第一次大规模引入 AI 的时间点。中国百模大战白热化：文心、通义、Kimi、智谱、阶跃、Minimax、DeepSeek 都在这一年完成关键产品发布。',
+    tag: '里程碑',
+  },
+  {
+    year: 2024, era: '智能体',
+    title: 'Agent 与多模态生成',
+    subtitle: 'Sora · Computer Use · GPT-4o',
+    summary: 'OpenAI Sora 让 AI 能生成 1 分钟视频；Anthropic 推出 Computer Use 让模型直接操作浏览器；GPT-4o 实现端到端语音对话。AI 开始"动手"。',
+    plain: '过去的 AI 像一个只能动嘴的顾问——告诉你怎么做，但你得自己动手。2024 年这一切变了：<br>• <strong>2 月</strong>：Sora 发布，60 秒高清视频从一句话生成；<br>• <strong>5 月</strong>：GPT-4o 发布，端到端实时语音对话，延迟 320ms；<br>• <strong>10 月</strong>：Anthropic 发布 Computer Use，Claude 能<strong>直接看屏幕、移动鼠标、敲键盘</strong>，像真人一样操作电脑。',
+    analogy: '想象你雇了一个新实习生。<br>• 2022 年的实习生：你说什么他就照搬什么。<br>• 2023 年的实习生：你贴个截图给他，他能看懂截图里在说什么。<br>• <strong>2024 年的实习生：你给他一个目标——"把这 50 个商品上传到亚马逊后台"——他自己打开浏览器、登录、上传、填表、提交，只在卡住的时候问你</strong>。<br>这就是 Agent。',
+    mechanism: 'Agent = LLM + 工具调用 + 循环。模型每一步会做三件事：① 看当前状态（截图、文档、对话历史）② 决定下一步动作（点击哪个按钮、调用哪个 API、写哪段文字）③ 执行后看结果，再循环。Computer Use 在屏幕上识别坐标的精度已经接近人类——它知道"提交按钮"在屏幕的 (847, 612) 位置。视频生成（Sora）的关键是把"扩散模型"和 Transformer 结合，让模型不仅生成静止画面，还能保持<strong>跨帧的物体一致性</strong>。',
+    impact: 'Agent 概念全面普及。RPA（机器人流程自动化）行业被颠覆——过去要写一周脚本的事情，Agent 一个晚上就跑完了。<strong>电商运营、客服、内容产线开始用 Agent 替代部分人力</strong>。视频广告制作成本下降 90%——一支 30 秒产品视频的制作周期从 2 周降到 2 小时。一个新职业冒出来：Agent 训练师。',
+    tag: '突破',
+  },
+  {
+    year: 2025, era: '推理模型',
+    title: '推理模型时代',
+    subtitle: 'o1 · Claude Sonnet 3.7 Thinking · DeepSeek R1',
+    summary: '模型不再立刻回答，而是先在内部"思考"几秒到几分钟。在数学、代码、科研问题上能力跃升一个量级。DeepSeek R1 还首次以开源、低成本复现这一能力。',
+    plain: '2024 年 9 月，OpenAI 突然发布了一个奇怪的模型 o1——你问它问题，它居然<strong>不立刻回答</strong>。屏幕上出现一行字："Thinking..."。然后它会停 30 秒、有时几分钟，最后给出一个详细到夸张的答案。它在 IMO（国际数学奥林匹克）题目上的正确率从 13% 跃升到 83%。',
+    analogy: '过去的 AI 像那种考试一发卷就抢答的学生——快、但容易写错。<br><br>推理模型像<strong>会先打草稿的学生</strong>。问它一道数学题，它内部会写"我先列出已知条件…接下来分两种情况讨论…验证一下…等等好像第二步算错了，重来"——可能在心里推演 10 万字的草稿，最后才给你最终答案。这种"慢思考"让能力突飞猛进。',
+    mechanism: '关键技术叫<strong>"链式思考"（Chain-of-Thought, CoT）+ 强化学习</strong>。模型被训练成在最终回答前，先生成一长串"思考"内容（不展示给用户）。强化学习的奖励信号告诉模型："你这条思考路径最终答对了，多走这条路；这条路径错了，少走"。模型学会了反思、回溯、验证——这些过去只有人类才有的元认知能力。<br><br>2025 年 1 月，中国公司 DeepSeek 开源了 R1——<strong>用 1/20 的成本复现了 o1 的能力</strong>，并把训练方法完全开源。这是 AI 史上最重磅的开源事件之一。',
+    impact: '科研、医疗诊断、复杂代码任务开始大规模 AI 化。中美算力竞赛进入"训练 + 推理"双战场——光训练模型不够，每次推理也要烧很多算力。<strong>DeepSeek 引发了"算力效率"的觉醒</strong>：模型可以做得更小、更快、更便宜，仍然达到顶尖水平。NVIDIA 股价在 R1 发布当周市值蒸发 6000 亿美元。',
+    tag: '革命',
+  },
+  {
+    year: 2026, era: '智能体',
+    title: '当下 · Agentic Commerce',
+    subtitle: '我们正在这里',
+    summary: 'Agent 在浏览器、电商后台、设计软件中长时间自主工作。跨境电商进入"AI 全链路"阶段——选品、写 listing、定价、客服、广告投放都由 Agent 主导。',
+    plain: '今天，2026 年 5 月。你给一个 Agent 一个目标——<strong>"把这款电饭煲在德国亚马逊上线，目标月销 500 台"</strong>——然后去喝杯咖啡。<br><br>等你回来，它已经：① 研究了德国厨房电器市场和竞品定价；② 用品牌视觉语言生成了 8 张产品图；③ 写好了符合德语 SEO 的 listing；④ 模拟测算了三档定价的利润；⑤ 把决策点整理成一份 PPT 等你审核。一切发生在 4 小时内。',
+    analogy: 'AI 已经从"工具"变成"虚拟同事"。<br>• <strong>2020 年</strong>：你打开 Word，AI 给你纠错；<br>• <strong>2023 年</strong>：你跟 AI 说"帮我写产品描述"，它写一段；<br>• <strong>2024 年</strong>：你跟 AI 说"上传这个商品"，它会代你点鼠标；<br>• <strong>2026 年</strong>：你跟 AI 说"把这个品牌做起来"，它会规划、执行、汇报，像一个能独立干完一个 epic 的下属。',
+    mechanism: '让 Agent 真正能"长时间自主工作"，靠的是几件事的叠加：<br>• <strong>200K-1M 长上下文</strong>：Agent 能记住整周的工作状态而不丢上下文。<br>• <strong>推理模型</strong>：遇到判断题时不抢答，先思考再决策。<br>• <strong>Computer Use / 工具协议</strong>：能直接操作真实的浏览器、ERP、设计软件。<br>• <strong>多 Agent 协作</strong>：选品 Agent + 写 listing Agent + 投放 Agent + 客服 Agent，像一个虚拟团队。<br>• <strong>审计层</strong>：每一步决策都有日志，人类做最后审核。',
+    impact: '运营岗位结构重塑——单个运营的"管理半径"从过去的 30 个 SKU 扩展到 3000 个。中小卖家通过 Agent 获得了与大卖家同等的"运营带宽"。<strong>美的电商团队的核心命题，正在从"用 AI 工具提效"，变成"如何驾驭一个虚拟运营军团"</strong>。下一个 5 年的关键问题：人类的角色应该坐在哪一层？',
+    tag: '当下',
+  },
+  // ── 次级节点（无独立 demo）──
+  {
+    year: 1958, era: '萌芽', title: '感知机 · Perceptron',
+    subtitle: 'Frank Rosenblatt · 第一个能学习的神经网络',
+    summary: 'Rosenblatt 在康奈尔造出感知机 Mark I——一台用 400 个光敏元件做成的"会自己调权重"的机器。这是现代神经网络的祖先。',
+    plain: '《纽约时报》当年报道说："海军披露了一种电子计算机的雏形，预期它能行走、说话、看、写、自我复制并意识到自身的存在。"60 多年后我们才走到一半。<strong>感知机的核心思想——给输入加权求和、根据错误调整权重——至今仍是深度学习的最底层逻辑</strong>。',
+    impact: '激起 AI 第一波研究热潮。1969 年 Minsky 证明它无法解决"异或"等非线性问题，热潮转冷。',
+    tag: '理论',
+  },
+  {
+    year: 1969, era: '萌芽', title: '《Perceptrons》 · 第一次 AI 寒冬',
+    subtitle: 'Minsky & Papert · 学界对神经网络的"判决书"',
+    summary: 'Minsky 与 Papert 出版《Perceptrons》，数学证明单层感知机无法解决简单的"异或"问题。学界对神经网络失去信心，长达 17 年。',
+    plain: '这本书被很多人解读成"神经网络方向走不通"。研究经费冻结、论文发不出去，神经网络研究者被同行视为不务正业。<strong>这是 AI 史上的第一次寒冬，一直持续到 1986 年反向传播算法重新点燃神经网络</strong>。',
+    impact: 'AI 研究热度急速降温，整整一代 PhD 转向了符号主义。',
+    tag: '理论',
+  },
+  {
+    year: 1986, era: '专家系统', title: '反向传播算法',
+    subtitle: 'Rumelhart · Hinton · Williams',
+    summary: 'Hinton 等人发表《Learning representations by back-propagating errors》，确立了多层神经网络的训练算法——反向传播。神经网络从"死刑判决"中复活。',
+    plain: '反向传播的关键是<strong>"把误差从输出层一层层往回传，每层根据自己对误差的贡献调整权重"</strong>。这解决了 Minsky 17 年前提出的难题——多层网络确实可以学习非线性问题。Hinton 因此被誉为"深度学习之父"。',
+    impact: '神经网络研究复苏。但 90 年代算力不足，仍未发挥威力，要等到 2012 年 GPU + 大数据。',
+    tag: '突破',
+  },
+  {
+    year: 2006, era: '专家系统', title: '深度信念网络 · DBN',
+    subtitle: 'Hinton · "Deep Learning" 一词登场',
+    summary: 'Hinton 提出"深度信念网络"，第一次证明很深的神经网络是可以训练的。"深度学习"这个词从此进入主流。',
+    plain: 'Hinton 当时已经 60 岁，在多伦多大学坐了 20 年冷板凳。他用一种"逐层预训练"的方法，把 7 层神经网络训练成功——在过去这被认为不可能。<strong>"深度"指的就是层数多</strong>，AI 领域正式进入"深度学习"时代的预热期。',
+    impact: 'NIPS 2006 论文引发学界重新关注深度网络，为 2012 年 AlexNet 的爆发埋下伏笔。',
+    tag: '突破',
+  },
+  {
+    year: 2014, era: '深度学习', title: 'GAN · 生成对抗网络',
+    subtitle: 'Ian Goodfellow · 让 AI 学会"创造"',
+    summary: 'Goodfellow 在蒙特利尔的酒吧里想出 GAN：让两个网络互相对抗——一个造假，一个鉴假。AI 从"识别"迈向"生成"。',
+    plain: 'GAN 的工作方式像<strong>赝品贩子和警察的猫鼠游戏</strong>：生成器尽力造出以假乱真的图，判别器尽力识破。两者互相进步，最终生成器画的图连判别器都看不出来——这时 AI 就"学会画画"了。',
+    impact: '"AI 生成艺术"概念诞生。后来的 Deepfake、StyleGAN、人脸合成都源自这条路线。',
+    tag: '突破',
+  },
+  {
+    year: 2015, era: '深度学习', title: 'ResNet · 152 层深网络',
+    subtitle: '何恺明 · 微软亚洲研究院',
+    summary: '何恺明等人提出"残差连接"，让 152 层深的网络第一次能训练成功。ResNet 在 ImageNet 上把错误率压到 3.57%——超过人类。',
+    plain: '过去网络越深越难训练——不是因为不够聪明，而是<strong>梯度在回传时会指数级衰减</strong>，深层网络的权重根本动不了。何恺明的天才一笔是加上"残差连接"——让信号可以跳层走。这一刀解决了深度学习的核心瓶颈。',
+    impact: 'ResNet 思想被几乎所有现代神经网络采用——包括 Transformer、GPT、Claude。',
+    tag: '突破',
+  },
+  {
+    year: 2018, era: '大语言模型', title: 'BERT 与 GPT-1',
+    subtitle: '"预训练 + 微调"成为新范式',
+    summary: 'Google 发布 BERT，OpenAI 发布 GPT-1。两者都用"先在海量文本上预训练，再针对具体任务微调"的范式，刷新所有 NLP 任务记录。',
+    plain: '过去 NLP 是<strong>"一个任务一套模型"</strong>——做翻译训一个、做问答训一个，互不相通。BERT 和 GPT-1 改变了游戏：先用整个互联网的文本"通读一遍"，再针对具体任务做小规模微调。一个底座，N 个应用。',
+    impact: '"基础模型"概念诞生。GPT 路线后来通向 ChatGPT，成为主流。',
+    tag: '里程碑',
+  },
+  {
+    year: 2019, era: '大语言模型', title: 'GPT-2 · "太危险不敢发布"',
+    subtitle: 'OpenAI · 15 亿参数',
+    summary: 'OpenAI 发布 GPT-2 的同时，宣布"由于潜在滥用风险"暂不公开完整模型——这是 AI 史上第一次因"危险性"而限制发布。',
+    plain: 'GPT-2 第一次让人感到害怕——你给它一句开头，它能写出一整篇看起来像人写的文章，包括假新闻、假评论、钓鱼邮件。<strong>OpenAI 决定分阶段发布</strong>，先放小模型看看社会反应。这开创了 AI 模型"分级发布"的先例。',
+    impact: 'AI 安全（AI Safety）成为独立研究方向。Anthropic 后来成立的核心动机之一就是这个事件。',
+    tag: '里程碑',
+  },
+  {
+    year: 2021, era: '大语言模型', title: 'CLIP · Codex · 跨模态雏形',
+    subtitle: 'OpenAI · 文字与图像第一次"对齐"',
+    summary: 'OpenAI 发布 CLIP（让文字和图像共享同一个理解空间）和 Codex（GPT-3 微调成代码模型）。前者是多模态的起点，后者是 GitHub Copilot 的底座。',
+    plain: 'CLIP 让 AI 第一次<strong>把"猫的图"和"猫"这个词放在同一个数学空间里</strong>——这是后来 DALL-E、Midjourney、Stable Diffusion 的基础。Codex 则把 GPT-3 用代码语料专门训练，从此<strong>"AI 写代码"成为现实</strong>。',
+    impact: '多模态生成元年。GitHub Copilot 一年内吸引超 100 万开发者订阅。',
+    tag: '突破',
+  },
+  {
+    year: 2024, era: '大语言模型', title: 'GPT-4o · 端到端语音',
+    subtitle: 'OpenAI · 320ms 实时对话',
+    summary: 'GPT-4o 把语音、文字、图像统一到一个模型——不再是"语音→文字→模型→文字→语音"的串行管道，而是端到端处理。延迟降到 320ms，接近人类对话节奏。',
+    plain: '过去和 AI 语音对话像打卫星电话——你说一句，它要把声音转成文字、跑模型、再转回声音，每一步都耗时 1-2 秒。GPT-4o 的革命在于<strong>"语音直接进、语音直接出"</strong>，中间没有文字这层。它能听出你的语气、笑声、犹豫，能用相应情绪回你。',
+    impact: '语音助手赛道（Siri、Alexa、Google Assistant）面临史上最大冲击。2025 年成为"AI 语音原生应用"爆发年。',
+    tag: '突破',
+  },
+  {
+    year: 2024, era: '推理模型', title: 'o1 · 慢思考的诞生',
+    subtitle: 'OpenAI · "Thinking..." 模式首发',
+    summary: 'OpenAI 发布 o1——第一个公开的"会先思考再回答"的模型。在数学奥赛题上从 13% 跃升到 83%。',
+    plain: '不像过去的 GPT 一发问就抢答，o1 会先停下来"想"——屏幕上显示 "Thinking..."，几十秒后再给出答案。<strong>这是 AI 第一次具备人类的"慢思考"能力</strong>。它内部会写一长串"草稿"——尝试、回溯、验证。',
+    impact: '"推理模型"成为独立赛道。Claude、Gemini、DeepSeek 半年内各自跟进。',
+    tag: '突破',
+  },
+  {
+    year: 2025, era: '智能体', title: 'Operator · 通用浏览器 Agent',
+    subtitle: 'OpenAI · 第一个面向消费者的 Agent 产品',
+    summary: 'OpenAI 发布 Operator——一个能直接打开浏览器、订机票、买东西、填表单的 AI Agent。从"AI 聊天"迈向"AI 干活"。',
+    plain: 'Operator 不是聊天机器人——它有自己的浏览器，你能看着它<strong>实时打开网页、移动鼠标、点击按钮</strong>。让它"帮我订北京到东京下周一最便宜的机票"，它会真的去 Skyscanner 比价、跳到航司官网下单——只在付款前停下来等你确认。',
+    impact: '"AI Agent" 从概念变成消费级产品。Manus、Devin 等创业公司涌现。Agent 取代部分白领工作的讨论从科幻变成日常话题。',
+    tag: '突破',
+  },
+];
 
 /* ============================================================
-   2. 每周 AI 大事件
+   2. 每周 AI 大事件 · 本周 5 条
    ============================================================ */
 window.WEEKLY = {
-  "weekOf": "",
-  "updated": "",
-  "next": "",
-  "events": []
+  weekOf: '2026 · 第 19 周 · 5 月 4 日 — 5 月 8 日',
+  updated: '更新于 2026.05.08',
+  next: '下次更新：2026.05.15（每周日晚）',
+  events: [
+    {
+      kind: '模型升级',
+      title: 'Claude Sonnet 4.5 上线 200K 上下文',
+      teaser: 'Anthropic 把 Sonnet 4.5 的上下文窗口扩展到 200K，并降低了 30% 的 API 单价。',
+      glyph: 'pulse',
+      body: [
+        '本周一，Anthropic 发布 Sonnet 4.5 的更新版本。三个变化值得关注：',
+        '1. 上下文从 64K 扩展到 200K——足够一次塞进 30 万字的产品手册或整本商品类目。',
+        '2. API 价格下调 30%，输入价格降至 \$2.4/M tokens，输出 \$12/M tokens。',
+        '3. SWE-bench Verified 提升至 73%，工具调用稳定性显著改善。',
+        '对跨境电商的直接影响：把整个店铺的全部 listing + 后台数据一次性丢给模型做诊断、改写、合规审查，从工程难题变成几行 prompt 的事。',
+      ],
+    },
+    {
+      kind: '开源项目',
+      title: 'GitHub: agent-toolkit 突破 30k stars',
+      teaser: '由前 Replit 工程师维护的 agent-toolkit 本周破 3 万星，重新定义了"工具调用"的标准协议。',
+      glyph: 'branch',
+      body: [
+        'agent-toolkit 是一个用 TypeScript 写的开源 SDK，提供了一套统一的"工具描述 → 执行 → 结果回传"协议，主要特点：',
+        '• 与 Claude / GPT / Gemini / Qwen 全部兼容，写一次就能切换底层模型。',
+        '• 内置浏览器自动化、文件系统、Shell、SQL 四类常用工具的安全沙箱。',
+        '• 已被 Vercel、Linear、Notion 内部使用。',
+        '为什么重要：之前每家公司都在重复造轮子。这个项目让"做一个能自己干活的 Agent"的工程门槛从 2 周降到 2 小时。',
+      ],
+    },
+    {
+      kind: '新概念',
+      title: 'Test-time Self-Distillation',
+      teaser: 'Stanford × Together AI 团队提出推理时自蒸馏：让模型用自己的思考过程实时压缩成更短的输出。',
+      glyph: 'spark',
+      body: [
+        '本周二 arxiv 上线一篇引用量飙升的论文：《Test-time Self-Distillation》。',
+        '核心想法：让推理模型先"想很多"（生成长 chain-of-thought），然后让同一模型在线把这段思考蒸馏成 1/10 长度的高密度回答。',
+        '效果：在 GPQA、MATH 上，效果与原始长推理基本持平，但响应延迟下降 70%、token 成本下降 80%。',
+        '对应用层的意义：推理模型贵、慢的最大痛点之一开始有解。预计两个月内会被各家厂商集成。',
+      ],
+    },
+    {
+      kind: '政策',
+      title: '欧盟 AI Act · Agentic 系统补充指引',
+      teaser: '欧盟委员会发布 Agentic AI 系统的合规补充指引，明确"自主代理用户操作"必须保留可审计日志。',
+      glyph: 'shield',
+      body: [
+        '欧盟委员会本周三发布的补充指引明确了三件事：',
+        '1. Agent 代表用户执行外部操作（下单、发邮件、签合同）必须保留 6 个月的完整决策日志。',
+        '2. 跨境电商场景下，Agent 不得在未告知用户的情况下完成交易闭环。',
+        '3. 高风险类目（金融、医疗、未成年人服务）需要"二次人工确认"机制。',
+        '直接影响：在欧洲做 AI 自动化运营的卖家，必须在 6 个月过渡期内补齐审计日志能力，否则面临最高营业额 4% 的罚款。',
+      ],
+    },
+    {
+      kind: '公司动态',
+      title: 'Shopify 宣布原生集成 Claude / GPT 客服',
+      teaser: 'Shopify 在本周开发者大会上宣布，6 月起所有商家可一键启用 Claude 或 GPT 作为店铺客服底座。',
+      glyph: 'box',
+      body: [
+        'Shopify 在 5 月 7 日的 Edition 大会发布"AI Storefront"套件：',
+        '• 一键启用 Claude / GPT-4o / Gemini 之一作为客服 / 选品助手。',
+        '• 模型直接读取店铺商品库、订单数据、退换货记录。',
+        '• 多语种回复（含中、英、德、日、西、阿）开箱即用。',
+        '• 商家按 Shopify Plus 套餐内打包计费，不需要额外签 OpenAI / Anthropic 合同。',
+        '对中国卖家的意义：跨境店铺的"24 小时多语种客服"从一个独立系统建设，变成"在 Shopify 后台勾一个选项"。中小卖家成本降低尤其明显。',
+      ],
+    },
+  ],
 };
+
+/* ============================================================
+   4. 论文与博客带读 · Reading Notes
+   ============================================================ */
+window.READINGS = [
+  {
+    id: 'building-effective-agents',
+    week: '第 1 篇 · 2026.05',
+    source: 'Anthropic',
+    sourceUrl: 'https://www.anthropic.com/research/building-effective-agents',
+    title: 'Building effective agents',
+    titleCn: '如何构建真正有效的 Agent',
+    readingTime: '原文 · 25 分钟',
+    annotator: 'AI 自动生成',
+    pyramid: {
+      top: '核心论点：构建 Agent 系统的最佳实践是"先用 Workflow 解决，确实不行再上 Agent"',
+      mid: [
+        '前提一 · 区分 Workflow 与 Agent 的本质差异',
+        '前提二 · Workflow 已能覆盖 90% 场景',
+        '结论 · 极简 + 透明 + ACI 是可靠 Agent 的三大支柱',
+      ],
+      base: [
+        { k: '定义', v: 'Workflow = 预定义路径；Agent = 动态决策' },
+        { k: '模式', v: '5 种 Workflow 模式按复杂度递增' },
+        { k: '场景', v: '只有"步数不可知 + 路径不可预测"才需 Agent' },
+        { k: '准则', v: '极简、透明、精心设计 ACI 工具说明' },
+      ],
+    },
+    tldr: 'Anthropic 总结了过去一年与几十家团队合作做 Agent 系统的经验，得出一个反直觉的结论：大多数"Agent 项目"其实不需要 Agent。简单的工作流（Workflow）就能解决，复杂度反而会拖累系统稳定性。',
+    sections: [
+      {
+        h: '一、Agent 与 Workflow 的本质区别',
+        en: 'Workflows are systems where LLMs and tools are orchestrated through predefined code paths. Agents, on the other hand, are systems where LLMs dynamically direct their own processes and tool usage.',
+        cn: 'Workflow 是<strong>"人写好的流程，LLM 在固定步骤上做填空"</strong>；Agent 是<strong>"LLM 自己决定下一步做什么、用什么工具、什么时候停"</strong>。',
+        note: '这个定义最关键的词是 "predefined" 和 "dynamically"。Workflow 流程可被画成流程图，Agent 不能——因为它的流程是模型每一步实时生成的。',
+        demoId: 'workflow-vs-agent',
+        compare: {
+          aLabel: 'Workflow · 预定义路径',
+          a: '像装配线：每个工位做什么、下一站去哪都写死。优点是稳定可预测；缺点是遇到没设计过的情况就停摆。',
+          bLabel: 'Agent · 动态决策',
+          b: '像一个新实习生：你给他工具和目标，他自己决定先做什么、再做什么、什么时候算完。灵活但难调试。',
+        },
+        think: {
+          q: '想想看：如果让 AI 帮你"按品牌调性改写一段商品描述"，应该用 Workflow 还是 Agent？',
+          a: '答案是 <strong>Workflow</strong>。任务的步骤是固定的：① 读原文 → ② 套用品牌调性 prompt → ③ 输出改写版。没有"未知分支"，不需要 Agent 的动态决策。<br><br>反例：如果任务变成"改写这段描述并主动去搜竞品的同类描述做对比，再决定要不要调整"——这就需要 Agent 了，因为"搜几次、对比哪些"是不可预知的。',
+        },
+      },
+      {
+        h: '二、五种 Workflow 模式（按复杂度递增）',
+        en: 'Prompt chaining decomposes a task into a sequence of steps. Routing classifies an input and directs it to a specialized followup task. Parallelization runs subtasks simultaneously. Orchestrator-workers uses a central LLM to break down tasks. Evaluator-optimizer iterates until quality criteria are met.',
+        cn: '从简单到复杂：<strong>1) Prompt 串联</strong>：把任务拆成几步顺序执行 → <strong>2) 路由</strong>：先分类再分发到专门 prompt → <strong>3) 并行</strong>：同时跑多个子任务 → <strong>4) 主从架构</strong>：一个 LLM 调度，多个 LLM 干活 → <strong>5) 评估优化器</strong>：生成 → 评分 → 改进，循环直到达标。',
+        note: '90% 的"AI 应用"用前三种就够了。第 4、5 种已经接近 Agent，但流程仍然是预定义的——只是更灵活。',
+        demoId: 'five-patterns',
+        quiz: {
+          q: '场景题：客户上传一张"商品图 + 文案需求"，要求生成 5 个语言版本的 Listing 文案。下列哪种模式最合适？',
+          opts: [
+            'Prompt Chaining · 串联：先翻译再润色',
+            'Routing · 路由：按语言分发到不同 prompt',
+            'Parallelization · 并行：5 个语言同时生成',
+            'Evaluator-Optimizer · 评估优化器：循环改写直到达标',
+          ],
+          answer: 2,
+          explain: '5 个语言之间互相独立，<strong>并行</strong>是最直接的——一次性发起 5 个请求、等齐返回。串联会增加 5 倍延迟；路由更适合"输入类型不同"的情况；评估优化器适合追求高质量的小批量任务。',
+        },
+      },
+      {
+        h: '三、什么时候才真的需要 Agent',
+        en: 'Agents can be used for open-ended problems where it\'s difficult or impossible to predict the required number of steps, and where you can\'t hardcode a fixed path.',
+        cn: '只有当问题<strong>"步数不确定 + 路径不可预知"</strong>时，才需要 Agent。例如：让 AI 修复一个未知 bug——不知道要查多少文件、改多少行；让 AI 完成一次浏览器操作任务——不知道页面会跳转到哪里。',
+        note: 'Anthropic 用 SWE-bench（修 GitHub 真实 bug）和 Computer Use（操作浏览器）作为 Agent 的代表场景。这两个场景的共同点是<strong>"环境会反馈"</strong>——Agent 看见结果再决定下一步。',
+        demoId: 'agent-loop',
+        quiz: {
+          q: '判断：以下哪个跨境电商场景"真的需要 Agent"？',
+          opts: [
+            '把中文商品标题翻译成 5 种语言',
+            '根据本周销量数据生成图表周报',
+            '收到一条差评，自主调研订单 / 物流 / 退款记录后决定回复策略',
+            '把 100 张产品图压缩到指定尺寸',
+          ],
+          answer: 2,
+          explain: '前三项的步骤都是<strong>预先可知</strong>的（翻译、生成、压缩），Workflow 即可。只有"调研差评"是<strong>步数不确定 + 路径不可预知</strong>——可能查 1 个数据库就够，也可能要查 5 个；可能直接回复，也可能先升级到客服主管。这正是 Agent 的典型场景。',
+        },
+      },
+      {
+        h: '四、构建可靠 Agent 的三条准则',
+        en: 'Maintain simplicity in your agent\'s design. Prioritize transparency by explicitly showing the agent\'s planning steps. Carefully craft your agent-computer interface (ACI) through thorough tool documentation and testing.',
+        cn: '<strong>1) 极简：</strong>能不加的步骤就不加；<strong>2) 透明：</strong>让 Agent 的"思考过程"可被人类追踪；<strong>3) ACI 设计：</strong>把工具的说明书写到极致——工具描述写得多清楚，Agent 用得就有多稳。',
+        note: '"ACI"（Agent-Computer Interface）这个概念是这篇文章的核心贡献。意思是：Agent 看不到屏幕，它只能通过你给它的"工具说明文档"理解外部世界——所以那份文档的质量，决定了 Agent 的上限。',
+        think: {
+          q: '为什么"工具说明书"的质量这么关键？人写代码看到工具直接调就行了，Agent 不也一样？',
+          a: '区别在于：人类工程师调用一个 API 时，会去翻文档、看示例、试错；Agent 没有"翻文档"的环节——你给它的<strong>工具描述就是它对那个工具的全部认知</strong>。<br><br>说明书写得模糊，Agent 就会乱用工具、参数填错、调用顺序混乱。Anthropic 团队发现：仅仅把工具描述从"功能简述"改成"含示例和常见错误的完整说明"，Agent 成功率能从 40% 提升到 80% 以上。',
+        },
+      },
+      {
+        h: '五、对工程师的实用建议',
+        en: 'When building applications with LLMs, find the simplest solution possible, and only increase complexity when needed. Sometimes this means not building agentic systems at all.',
+        cn: '"先用最简单的方式做出来，确认不够用，再升级。" 大多数情况下，<strong>一次精心设计的 prompt + 检索（RAG）就能解决问题</strong>，不需要 Agent。',
+        note: '这一段是给产品经理看的：先别问"我们要不要做 Agent"，先问"这个任务的 ROI 是否值得用 Agent 的成本和不可控性"。',
+        compare: {
+          aLabel: '错误打开方式',
+          a: '团队提议"做一个 AI 选品 Agent"——它要自己上网搜趋势、对比竞品、判断 SKU 是否值得跟进。结果跑两个月还在调试，成本不可控、结果不稳定。',
+          bLabel: '推荐打开方式',
+          b: '先做最小可用版本：每天定时跑一段 prompt + 公开榜单数据，输出"今日趋势 5 条"。运营每天花 5 分钟人审。等流程跑顺、数据沉淀够了，再考虑要不要升级到 Agent。',
+        },
+        think: {
+          q: '为什么 Anthropic 反复强调"先用最简单方式做"？这听起来不像创新公司该说的话。',
+          a: '因为他们见过太多团队<strong>用 Agent 的复杂度、付了 Agent 的成本、却拿到了 Workflow 的结果</strong>。<br><br>Agent 系统的不确定性会指数级放大：每一步都可能跑偏。如果一个任务用 3 步 Workflow 就能稳定 95% 成功率，那硬上 Agent 把它变成 8 步动态决策，最终成功率反而可能掉到 70%——同时还要承担 3 倍的 token 成本和无法 debug 的痛苦。<br><br>"克制"在这里不是反创新，而是<strong>工程纪律</strong>。',
+        },
+      },
+    ],
+    glossary: [
+      { term: 'LLM', def: 'Large Language Model，大语言模型。例如 GPT-5、Claude 4、DeepSeek V4，这类基于 Transformer 架构、用海量文本训练出来的"会写字、会推理"的模型。' },
+      { term: 'Agent', def: '能自主决定"下一步做什么"的 AI 系统。它会调用工具、看反馈、再决定，像一个能自己开浏览器的实习生。' },
+      { term: 'Workflow', def: '由人类预先写好流程、LLM 在固定步骤里填空的系统。流程图可以画出来。' },
+      { term: 'Prompt Chaining', def: '把一个大任务拆成几个小任务，按顺序让 LLM 一步一步做。例如先让它"写大纲"，再让它"按大纲写正文"。' },
+      { term: 'RAG', def: 'Retrieval-Augmented Generation，检索增强生成。先从知识库里找出相关资料，再把资料连同问题一起喂给 LLM。' },
+      { term: 'ACI', def: 'Agent-Computer Interface，Agent 与外部世界交互的接口。本质就是"工具的说明书"——Agent 通过文字描述理解每个工具能做什么。' },
+      { term: 'SWE-bench', def: '一个测试 AI 编程能力的标准测评集，里面是 GitHub 上真实开源项目的 bug。修对了多少 bug，就是分数。' },
+    ],
+    further: [
+      { type: '原文', label: 'Building effective agents · Anthropic', url: 'https://www.anthropic.com/research/building-effective-agents' },
+      { type: '配套', label: 'anthropic-cookbook · agent patterns 代码', url: 'https://github.com/anthropics/anthropic-cookbook' },
+      { type: '延伸', label: 'OpenAI · Practices for building agents', url: 'https://platform.openai.com/docs/guides/agents' },
+    ],
+  },
+
+  {
+    id: 'attention-is-all-you-need',
+    week: '第 2 篇 · 2026.05',
+    source: 'Google Brain / Google Research',
+    sourceUrl: 'https://arxiv.org/abs/1706.03762',
+    title: 'Attention Is All You Need',
+    titleCn: '注意力，就够了——Transformer 论文精读',
+    readingTime: '原文 · 35 分钟',
+    annotator: 'AI 自动生成',
+    pyramid: {
+      top: '核心论点：抛掉循环和卷积，只用「注意力机制」就能更好地处理序列。',
+      mid: [
+        '前提一 · RNN 的串行计算限制了规模与并行',
+        '前提二 · 自注意力可一步看见整段输入',
+        '结论 · Transformer 在翻译任务上更准、更快、更可扩展',
+      ],
+      base: [
+        { k: '架构', v: 'Encoder + Decoder × 6 层' },
+        { k: '核心', v: '多头自注意力 (Multi-Head)' },
+        { k: '位置', v: '正弦位置编码代替顺序' },
+        { k: '收益', v: 'WMT EN-DE BLEU 28.4 · 训练 12h' },
+      ],
+    },
+    tldr: '2017 年 Google 团队的这篇 8 页短论文催生了今天的 GPT、Claude、Gemini。它的贡献不在某个新算法，而在做了一次彻底的"减法"——把 RNN/CNN 全部抛掉，只保留注意力机制。读这篇论文，你能看到一个学科的转折点是怎么发生的。',
+    sections: [
+      {
+        h: '一、为什么 RNN 不够用了',
+        en: 'Recurrent models typically factor computation along the symbol positions of the input and output sequences... This inherently sequential nature precludes parallelization within training examples.',
+        cn: 'RNN（循环网络）必须<strong>一个词一个词依次处理</strong>——读完第 5 个词才能读第 6 个。这种串行结构让它没法在 GPU 上并行，训练长序列就会慢得没法用。',
+        note: '"Recurrent" 直译"循环"——指模型每一步都把上一步的隐藏状态作为输入。这个机制在小数据集上很优雅，但在 GPU 时代成了瓶颈：再多卡也得排队等。这是 Transformer 论文动手术的根本动机。',
+        compare: {
+          aLabel: 'RNN · 串行',
+          a: '像一个人按字读书：必须读完"我"才能读"喜"，读完"喜"才能读"欢"。每一步都依赖上一步的状态，再多人也帮不上忙。',
+          bLabel: 'Transformer · 并行',
+          b: '像把整页书拍照交给 100 个人同时分析。每个词同时看见所有其他词的位置和含义，一步出结果。GPU 一次性把整段算完。',
+        },
+      },
+      {
+        h: '二、自注意力机制是什么',
+        en: 'An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors.',
+        cn: '注意力的本质：让每个词主动去"问"其他词——<strong>「在理解我自己时，你们谁对我重要？」</strong>。每对词之间算一个相关度分数，用这些分数加权汇总，就得到这个词的新表示。',
+        note: 'Q (Query)、K (Key)、V (Value) 这三个名字来自数据库检索：用 Q 去匹配所有 K，得分高的 V 就被取出来。论文的关键贡献是把这套机制做成可并行、可堆叠的标准组件——而不是某种灵感闪现。',
+        think: {
+          q: '为什么"自注意力"在翻译任务上比 RNN 强？翻译不就是一句一句来的吗？',
+          a: '关键在<strong>长距离依赖</strong>。考虑这句："The animal didn\'t cross the street because <strong>it</strong> was too tired."——"it" 指代 animal，距离 7 个词。<br><br>RNN 处理到 "it" 时，"animal" 的信息已经被压缩进若干层隐藏状态，多次衰减。<br><br>自注意力则让 "it" 直接和 "animal" 算一次相关度，<strong>距离不增加任何代价</strong>。这就是为什么 Transformer 能稳定处理长上下文——今天的 200K 上下文直接源于这个性质。',
+        },
+      },
+      {
+        h: '三、多头注意力：为什么是"多头"',
+        en: 'Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.',
+        cn: '一个注意力头只能学一种关注方式。多头意味着<strong>同时跑 8 个独立的注意力</strong>——一个头可能学"主谓关系"，另一个学"修饰关系"，再一个学"指代关系"——最后拼起来。',
+        note: '原论文用 8 个头（h=8）。这个数字不是理论推导出来的，是工程上"够用且不浪费"的经验值。今天的大模型动辄 32-128 个头，但"多头"这个设计本身没变。',
+        compare: {
+          aLabel: '单头',
+          a: '像只用一种镜头看世界——比如只看远焦：能看清山，但桌上的字模糊。学习能力被限制在单一关注模式。',
+          bLabel: '多头',
+          b: '同时架 8 台不同焦段的相机：广角、长焦、微距各拍一张，最后合成一张包含所有维度信息的图像。学习能力呈线性扩展。',
+        },
+      },
+      {
+        h: '四、位置编码：抛掉顺序后怎么办',
+        en: 'Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens.',
+        cn: '注意力本身是<strong>无顺序的</strong>——它只知道"哪些词重要"，不知道谁在前谁在后。论文用一组固定的<strong>正弦/余弦函数</strong>给每个位置生成一个独特"指纹"，加到词向量上。模型从此知道每个词的位置。',
+        note: '这是论文里最容易被忽视、但最巧妙的一环。位置编码用三角函数而非可学习的向量——好处是模型可以处理比训练时更长的序列（外推性）。今天主流的 RoPE、ALiBi 都是它的变体。',
+        quiz: {
+          q: '判断：以下说法正确的是？',
+          opts: [
+            'Transformer 必须使用正弦位置编码，不能换',
+            'Transformer 没有位置编码也能工作，只是性能差一点',
+            '位置编码加到词向量上，让模型同时获得"是什么词"和"在哪个位置"两份信息',
+            '位置编码是可训练参数，模型自己学出来',
+          ],
+          answer: 2,
+          explain: '位置编码是<strong>加</strong>到词向量上的（element-wise sum），让一个向量同时携带词义和位置信号，注意力机制就能区分顺序。论文用的是固定正弦编码，但后来出现的可学习编码、相对位置编码、RoPE 等都能替代——所以选项 1 错。没有位置编码时，模型对"我打他"和"他打我"无法区分，性能会崩溃，所以选项 2 错。选项 4 描述的是另一种方案 (learned positional embedding)，不是原论文用的方法。',
+        },
+      },
+      {
+        h: '五、对今天工程师的意义',
+        en: 'On the WMT 2014 English-to-German translation task, the big transformer model achieves 28.4 BLEU, improving over the existing best results, including ensembles, by over 2.0 BLEU.',
+        cn: '论文在 8 张 P100 GPU 上训练 12 小时就达到了 SOTA（state of the art）。这个数字今天看不算什么，但在 2017 年是<strong>"小成本击败大组合模型"</strong>——这才是 Transformer 真正可怕的地方：它不只是更准，还更省。',
+        note: '"小成本击败大组合"是 Transformer 引发产业巨变的根本原因。一旦一个架构同时具备"可并行、易扩展、效果好"，资本和算力就会大规模涌入——之后的 GPT-1/2/3 全是把这个架构疯狂放大的产物。',
+        think: {
+          q: '为什么这篇论文是"减法"？读起来感觉它加了好多东西（多头、位置编码、残差、LayerNorm…）。',
+          a: '关键看<strong>它砍掉了什么</strong>：<br><br>砍掉了 <strong>RNN</strong>（业界八十年代以来的标配）<br>砍掉了 <strong>CNN</strong>（计算机视觉迁移过来的中坚）<br>砍掉了 <strong>序列依赖</strong>（让训练并行化成为可能）<br><br>"加"的多头、位置编码、LayerNorm 都是<strong>为了支撑这次砍掉而搭的脚手架</strong>。论文的真正勇气在于"敢砍"——而当时整个学界都在 RNN 上加复杂度。<br><br>对工程师的启示：<strong>真正的范式跃迁，常常是把存量复杂度归零，而不是再叠一层。</strong>',
+        },
+      },
+    ],
+    glossary: [
+      { term: 'Transformer', def: '由 Encoder + Decoder 堆叠而成的神经网络架构。今天 GPT、Claude、Gemini 全部基于它。' },
+      { term: 'Self-Attention', def: '自注意力。一段话中每个词都和这段话里所有其他词算"相关度"，再据此更新自己的表示。' },
+      { term: 'Multi-Head Attention', def: '多头注意力。同时跑多组注意力机制，每组关注不同方面的关系，最后拼接。' },
+      { term: 'Q / K / V', def: 'Query、Key、Value。注意力机制中三个角色：Q 去匹配 K，匹配上的 V 被加权取出。来自数据库检索的类比。' },
+      { term: 'Positional Encoding', def: '位置编码。给每个词的位置一个独特"指纹"，加到词向量上，让本来无顺序感的注意力机制知道词序。' },
+      { term: 'BLEU', def: '机器翻译的评价分数，0–100，越高越好。Transformer 在 WMT EN-DE 上首次突破 28，超过当时所有集成模型。' },
+      { term: 'RNN', def: 'Recurrent Neural Network，循环神经网络。Transformer 出现前序列建模的主流。逐词处理，无法并行。' },
+      { term: 'SOTA', def: 'State of the Art。某个任务上当前公开发表的最高水平。' },
+    ],
+    further: [
+      { type: '原文', label: 'Attention Is All You Need · arXiv', url: 'https://arxiv.org/abs/1706.03762' },
+      { type: '配套', label: 'The Illustrated Transformer · Jay Alammar', url: 'https://jalammar.github.io/illustrated-transformer/' },
+      { type: '延伸', label: 'Andrej Karpathy · Let\'s build GPT (2 小时视频)', url: 'https://www.youtube.com/watch?v=kCc8FmEb1nY' },
+    ],
+  },
+];
 
 /* ============================================================
    3. AI × 跨境电商 · 思考存档
    ============================================================ */
-window.ESSAYS = [];
+window.ESSAYS = [
+  {
+    id: 'agentic-listing-2026-05',
+    week: '第 19 周 · 2026.05',
+    eyebrow: 'AGENTIC LISTING',
+    title: '从机器翻译到品牌一致性：Listing 自动化的三段式跃迁',
+    deck: '当模型能"理解"品牌而不只是"翻译"文字，跨境上新的瓶颈就从语言转移到了品牌资产管理。',
+    paragraphs: [
+      '过去三年，跨境电商的 AI 应用经历了三个明显的阶段，每一阶段对应着模型能力的一次跃迁。',
+
+      '**第一阶段：机器翻译（2022 之前）。** 这是最早被 AI 化的环节。GPT 出现之前，DeepL 和 Google Translate 已经把基础翻译做得不错。但它们只解决了"语言层"的问题——译文准确，却没有"购买欲"。德语用户读到的描述像产品说明书，不是品牌叙事。这一阶段的工具改进的是效率，不改变运营天花板。',
+
+      '**第二阶段：风格化生成（2023—2024）。** ChatGPT 和 Claude 让我们第一次能把"风格"作为指令传给模型。"用 Apple 风格写一段产品描述"或"针对北美年轻女性群体"——这些指令真的有效。这一阶段，绝大多数卖家把 AI 当作"高级翻译 + 文案改写"来用。问题是：模型每次的输出之间没有记忆，跨 SKU 之间品牌调性飘移；同一个店铺的 200 个 listing，看起来像 50 个文案抄手写的。',
+
+      '**第三阶段：品牌一致性（2025—当下）。** 真正的转折点是推理模型 + 长上下文。我们现在可以把品牌手册（tone of voice、禁用词、目标人群、视觉关键词）+ 历史 listing 全部塞进 200K 上下文，让模型在生成新 listing 之前先"读完整个品牌"。Claude Sonnet 4.5 的输出已经可以做到：同一系列 30 款 SKU 的描述风格完全一致，且能主动避开品牌禁忌（比如"compact"在某些品类不能用，因为暗示"功能少"）。',
+
+      '换句话说，AI 已经能从"翻译工"升级为"品牌实习生"。但要让它真正成为"品牌经理"，瓶颈在哪里？**在品牌资产的结构化程度。** 过去公司的"品牌"散落在 Word 文档、PPT、几个资深运营的脑子里。模型读不到这些，自然写不出"我们家的味道"。',
+
+      '我观察到，2026 年开始跑得快的跨境团队，做的不是更好的 prompt，而是更好的"品牌库"——把品牌指南拆成结构化的 YAML/JSON，附带 50–100 条标注好的"好/坏文案"对比样本。把这套库灌给 Agent，输出质量会比工程师调三个月 prompt 更稳定。',
+
+      '**给运营团队的三条具体建议：**',
+      '1. **不要让 prompt 工程师替代品牌经理。** 真正稀缺的不是会写 prompt 的人，是能把"我们家的语气"说清楚的人。',
+      '2. **把审核环节从"逐字读"升级为"抽样 + 抗性测试"。** Agent 一天能写 1000 条 listing，逐字看不完。改成抽 5%，加上故意诱导（"用你不该用的词写一遍"）测试一致性。',
+      '3. **品牌库要版本化。** 像管代码一样管品牌指南。每次大促前 freeze 一个版本，复盘后再合并。',
+
+      '一年之内，"AI 写得过去"会变成"AI 写得有品牌感"。差距会拉得很大。',
+    ],
+  },
+
+  {
+    id: 'agent-cost-curve',
+    week: '第 18 周 · 2026.04',
+    eyebrow: 'AGENT ECONOMICS',
+    title: 'Agent 不是更贵的客服，是不一样的成本曲线',
+    deck: '把 Agent 单纯当作"代替客服的人"会得出错误的 ROI。它的成本结构本质上不同。',
+    paragraphs: [
+      '运营团队评估 AI 客服 / Agent 时最常用的一个公式是：原来 10 个客服 × 月薪，对比 Agent API 月度账单。这个对比方法在大部分时候会得出"看起来很贵"的结论，进而搁置项目。但这个对比从根本上是错的。',
+      '**人的成本曲线是阶梯式的：**多一个 SKU、多一个语种、多一个时区，都需要在某个节点招新人。一旦跨过阈值就要补 1—2 个 FTE，工资是月度固定开销。',
+      '**Agent 的成本曲线是连续的：**多一笔咨询多几分钱 token。波峰波谷自动伸缩。',
+      '所以同一份预算，Agent 在"业务波动大、长尾场景多"的电商运营里效率天花板要高得多。但在"业务稳态、咨询量可预测"的成熟店铺，传统客服更便宜。',
+      '建议：先识别业务里"波动最大、长尾最碎"的环节（小语种 / 节日大促 / 新品类爆量），那是 Agent 最赚钱的切入点。不要从主力客服替换开始。',
+    ],
+  },
+  {
+    id: 'long-context-recall',
+    week: '第 17 周 · 2026.04',
+    eyebrow: 'LONG CONTEXT',
+    title: '200K 上下文好用，但请别忘记 "needle-in-haystack" 还会漏',
+    deck: '上下文窗口扩大不等于记忆力线性提升。在跨境运营场景里，这件事的代价是真金白银。',
+    paragraphs: [
+      '上下文从 64K 到 200K 是本周最大利好。但有一个被普遍忽视的细节：**所有大模型在 100K 之后都会出现 "lost in the middle" 现象。** 也就是说，你塞进 150K 文档，模型对开头和结尾的细节准确率都在 95%+，但对中间 60K 那一段的回忆准确率会跌到 70-80%。',
+      '为什么这件事对跨境电商重要？因为我们最爱用长上下文做的事，是把 200 个 listing + 品牌手册 + 历史客诉一起塞进去做诊断。**这恰恰是中间会被忽略的内容最多的场景。**',
+      '一个具体的失败例子：上周我们让 Sonnet 4.5 审查一份 80 个 SKU 的 listing 包，看哪些违反了"不要承诺医疗效果"的品牌规则。模型抓到了第 1—10 和第 70—80 的违规，但漏掉了第 30—50 的一些边缘案例。',
+      '**实践方案：** 长上下文用做"扫描"很合适，用做"穷举性审计"必须分批。把 200 个 listing 分成 4 批 × 50 条跑，结果合并。多花 4 倍 token 成本，换 95%+ 的覆盖率。',
+    ],
+  },
+  {
+    id: 'why-not-replace-coa',
+    week: '第 16 周 · 2026.04',
+    eyebrow: 'TEAM STRUCTURE',
+    title: '为什么不该用 Agent 替换"选品"，但应该替换"调研"',
+    deck: '同一个岗位的不同环节，AI 化的可行性差距巨大。不区分这一点会让团队陷入幻觉。',
+    paragraphs: [
+      '"AI 能不能替代选品师"是个被反复问的问题。我的判断：选品作为一个完整岗位，**短期内 AI 替代不了；但选品流程里 60—70% 的工作可以被 Agent 接管。**',
+      '把选品拆开看，大致有 5 步：(1) 趋势侦测、(2) 竞品调研、(3) 供应链匹配、(4) 利润测算、(5) 商业判断。前 4 步本质上是数据搜索 + 结构化整理 + 计算——这是 Agent 当前最擅长的。最后一步 "这个东西我们做不做"，需要对自家供应链、品牌、团队执行力有理解，是 Agent 给不出的。',
+      '正确的做法不是"招少几个选品师"，而是"现有选品师每周能评估 3 倍的候选品类"。这是一种**杠杆**的提升，不是**替代**。把 Agent 当作选品师的实习团队——它做一周的功课，让选品师只用花 1 天做最终判断。',
+      '团队结构的隐含变化：选品岗未来会从"全流程操盘"变成"判断 + 复核"。新人成长路径需要重新设计——年轻人没机会从前 4 步练手了，怎么练第 5 步？这是组织上要提前想的事。',
+    ],
+  },
+];
+
 
 /* ============================================================
-   4. MR.PP 论文带读
+   5. 每周大事件 · 历史归档（archive）
    ============================================================ */
-window.READINGS = [];
+window.WEEKLY_ARCHIVE = [
+  {
+    weekId: '2026-w18',
+    weekOf: '2026 · 第 18 周 · 4 月 27 日 — 5 月 3 日',
+    summary: 'GPT-5 Turbo 公测、Hugging Face 开源 Sora 复刻、白宫 AI 行动报告',
+    events: [
+      { kind:'模型升级', title:'OpenAI GPT-5 Turbo 进入公测', glyph:'pulse',
+        teaser:'API 价格下调 40%，新增 1M 上下文与原生工具调用 v2 协议。',
+        body:['GPT-5 Turbo 是 GPT-5 上线四个月后的首次大幅降本版本。','• 上下文 1M tokens（输入），输出仍上限 32K。','• 工具调用协议升级到 v2，结构化 JSON 失败率下降 60%。','• 价格：输入 $1.25/M、输出 $10/M。','• 限速：免费层每分钟 10 次，Plus 100 次。','对中小卖家影响：1M 上下文意味着可以一次塞进整个店铺三年的客服对话来做"为什么客户不下单"的归因分析。'] },
+      { kind:'开源项目', title:'Hugging Face 开源 Sora 复刻：OpenSora-2', glyph:'branch',
+        teaser:'13B 参数视频生成模型完整开放权重，4 秒 1080p 在 RTX 4090 上 8 分钟出片。',
+        body:['OpenSora-2 是 HF 与 OpenBMB 联合训练的开源视频模型。','• Apache 2.0 协议，权重 + 训练代码全部公开。','• 在 VBench 上得分 82.4，接近 Sora 早期版本。','• 推理在单张 4090 上可跑 4 秒 1080p 视频，约 8 分钟。','对跨境卖家：商品短视频从"找代运营拍"开始变成"产品图 + prompt → 视频"。但当前画质仍不如真人拍摄。'] },
+      { kind:'新概念', title:'Hierarchical Memory for Long-running Agents', glyph:'spark',
+        teaser:'DeepMind 提出 Agent 长期记忆的三层架构：工作记忆、情景记忆、语义记忆。',
+        body:['DeepMind 论文《H-Mem》提出 Agent 长跑时的记忆分层方案：','• Working memory：当前任务上下文（数千 tokens）。','• Episodic memory：过去执行过的具体任务（向量库）。','• Semantic memory：从大量执行中提炼的"经验法则"。','在 BrowseComp 长任务上，分层记忆让 Agent 完成率从 28% 提升到 47%。','应用：电商 Agent 跑了一个月之后才知道"周二早上 9 点上新转化率最高"——这种经验需要语义记忆来沉淀。'] },
+      { kind:'政策', title:'白宫发布《2026 AI Action Report》', glyph:'shield',
+        teaser:'强调本土供应链、关键基础设施 AI 安全审查，对中国出口的 AI 模型不在限制范围。',
+        body:['白宫 OSTP 在 4 月 30 日发布年度 AI 行动报告：','• 本土 GPU 制造、能源、训练数据安全列为第一优先级。','• 关键基础设施（电网、医疗）部署的 AI 系统须通过 NIST 红队测试。','• 对外贸易：对中国 AI 模型的进口（含中国研发的 SaaS 产品）暂不限制；但中国企业在美训练高算力模型仍受 BIS 出口管制。','跨境电商角度：对面向美国市场的中国 AI 工具（包括跨境 SaaS、AI 客服）当前没有直接合规风险。'] },
+      { kind:'公司动态', title:'Anthropic 招聘"Agent 安全研究员"扩编 80%', glyph:'box',
+        teaser:'Anthropic 宣布将 Agent 安全团队从 25 人扩到 45 人，重点关注代理用户操作的对抗性测试。',
+        body:['Anthropic 在 5 月 1 日的官方博客披露：','• Agent 安全团队（Agentic Misuse & Reliability）从 25 扩到 45 人。','• 招募方向：渗透测试、对抗性 prompt、社会工程学背景。','• 同时启动 "Bug Bounty for Agents"——找出 Claude 在代用户操作中被诱导的方式，最高奖金 $50k。','信号：头部厂商开始把"代理被骗"当成核心风险，而不是边角料。预示未来 Agent 部署的合规门槛会快速抬升。'] },
+    ],
+  },
+  {
+    weekId: '2026-w17',
+    weekOf: '2026 · 第 17 周 · 4 月 20 日 — 4 月 26 日',
+    summary: 'DeepSeek V4 开源、Cursor 推 Background Agents、加州 SB-1047 重启',
+    events: [
+      { kind:'模型升级', title:'DeepSeek V4 开源：670B MoE，37B 激活', glyph:'pulse',
+        teaser:'数学、代码、中文三项均超 GPT-5 Turbo，权重 MIT 协议开放。',
+        body:['DeepSeek 在 4 月 22 日开源 V4：670B 参数 MoE（专家混合）架构，每次激活 37B。','• MMLU-Pro 81.2，HumanEval 91.5，CMath 88.0——均超 GPT-5 Turbo。','• 训练成本对外披露：约 $5.8M（H800 集群，2 个月）。','• 权重以 MIT 协议放出，商业使用无限制。','对国内电商：第一个"开源 + 商业可用 + 中文足够好"的 670B 级别模型。本地化部署方案的成本拐点。'] },
+      { kind:'开源项目', title:'Cursor 推出 Background Agents', glyph:'branch',
+        teaser:'编辑器内建后台 Agent，能在用户写代码时同步跑测试、改 bug、补文档。',
+        body:['Cursor 4.0 引入 Background Agents：','• 用户在前台写代码，后台 Agent 持续读 diff，主动建议修复。','• 支持挂多个并行 Agent（一个写测试、一个跑 lint、一个补文档）。','• 与 GitHub Actions 打通，自动开 PR。','对跨境技术团队：这套模式已经从工程师工具溢出到运营场景——"运营在改 listing 时，后台 Agent 同步检查 SEO 关键词、合规风险、库存匹配"是同一种范式。'] },
+      { kind:'新概念', title:'Constitutional Classifiers 防越狱', glyph:'spark',
+        teaser:'Anthropic 发表新论文：用宪法 AI 训练的分类器把 jailbreak 成功率从 86% 降到 4.4%。',
+        body:['Anthropic 论文《Constitutional Classifiers》本周登 arxiv 头条：','• 用 Claude 自身按"宪法"生成数千万条对抗样本，训练专用分类器。','• 在大规模红队测试（3000+ 小时）中，jailbreak 成功率从基线 86% 降到 4.4%。','• 计算开销：增加约 4% 推理成本。','应用预期：将集成进 Claude API 默认链路，对外暴露成本极低。可能成为合规部署 Agent 的"准入门槛"。'] },
+      { kind:'政策', title:'加州 SB-1047 重启立法程序', glyph:'shield',
+        teaser:'被州长否决一年后，加州议员重提改写版本，对 1e26 FLOPS 以上模型设定责任框架。',
+        body:['加州参议员 Wiener 4 月 24 日提交 SB-1047 修订版：','• 适用门槛上调至训练算力 1e26 FLOPS（原 1e25），覆盖前沿模型。','• 删除原版"关闭开关"强制要求，改为"重大事故响应预案"。','• 增加"安全披露义务"——开发者须公开模型的红队测试结果。','加州若通过，事实上将成为美国 AI 安全监管的"事实标准"，对在加州运营的 OpenAI、Anthropic、Meta、Google 全部适用。'] },
+      { kind:'公司动态', title:'TikTok Shop 全量启用 AI 视频选品页', glyph:'box',
+        teaser:'TikTok 在 4 月 25 日宣布：所有商家的商品页改为 AI 自动剪辑短视频展示，无需上传素材。',
+        body:['TikTok Shop 美国站本周全量推送 "AI Showcase"：','• 商家上传商品图 + 文字描述，系统自动生成 6 秒短视频。','• 视频根据用户画像（年龄、地区、兴趣）个性化渲染——同一 SKU 不同人看到的版本不同。','• 商家可一键替换为人工拍摄版本，但默认开启 AI 版。','对中国卖家：之前"做不出本地化短视频"的痛点被平台层吸收。竞争点从"视频质量"上移到"产品本身 + 文案描述"。'] },
+    ],
+  },
+  {
+    weekId: '2026-w16',
+    weekOf: '2026 · 第 16 周 · 4 月 13 日 — 4 月 19 日',
+    summary: 'Google Gemini 2.5 发布、Meta Llama-4 开源、欧盟 AI Act 全面生效首周',
+    events: [
+      { kind:'模型升级', title:'Google Gemini 2.5 发布：原生 Agent 模式', glyph:'pulse',
+        teaser:'Gemini 2.5 Pro 与 Workspace 深度整合，Gmail / Docs / Sheets 内置 Agent 操作。',
+        body:['Google I/O 提前一个月发布 Gemini 2.5：','• 在 Workspace 全家桶内置 "Side Agent"，可代用户回邮件、整理文档、跑 Sheets 公式。','• 视频理解（YouTube 链接直接分析）原生支持，30 分钟视频 1 分钟读完。','• 价格与 GPT-5 Turbo 平级。','对运营：Gmail 里的客户邮件自动归类、回复草稿、订单状态查询全部内置——之前需要单独搭建的客服自动化第一次出现在工具自带的层面。'] },
+      { kind:'开源项目', title:'Meta 开源 Llama-4：405B 与 11B 双版本', glyph:'branch',
+        teaser:'保持完全开放权重 + 商业可用协议，11B 版本可在消费级显卡运行。',
+        body:['Meta 4 月 16 日发布 Llama-4：','• 405B 旗舰版：MMLU 86.0，对标 Claude Sonnet 4.5。','• 11B 紧凑版：可在 24GB 显存（4090）跑，MMLU 72.5。','• 协议：Llama 4 Community License，月活 7 亿以下完全免费商用。','对中小团队：11B 版本第一次让"在自己机器上跑一个能用的 LLM"门槛降到 4090 一张卡。本地部署的隐私敏感场景（财务、客户数据）开始有非云方案。'] },
+      { kind:'新概念', title:'Speculative Decoding × MoE', glyph:'spark',
+        teaser:'NVIDIA 与 MIT 联合论文：在 MoE 模型上做投机解码，推理速度再提 3.2x。',
+        body:['投机解码（speculative decoding）原本只在密集模型上有效。','本周 NVIDIA × MIT 论文证明：用一个小密集模型作为 draft，大 MoE 作为 verifier，可在 MoE 上同样获得 3.2x 加速。','在 GPT-5 Turbo（推测为 MoE）上实测：tokens/s 从 70 提升到 220。','应用预期：6 月内被 vLLM、TGI 等开源推理引擎集成。Agent 跑长任务的"推理慢"问题有望进一步缓解。'] },
+      { kind:'政策', title:'欧盟 AI Act 全面适用首周', glyph:'shield',
+        teaser:'通用大模型条款（GPAI）于 4 月 13 日全面生效，OpenAI、Anthropic 已提交首份合规报告。',
+        body:['欧盟 AI Act 的通用人工智能（GPAI）条款本周全面适用：','• 训练算力 > 10^25 FLOPS 的模型须提交风险评估、能耗报告、版权数据来源说明。','• 不合规罚款：最高 1500 万欧元或全球营收 3%。','OpenAI、Anthropic、Google、Meta、Mistral 五家已在生效首日提交首份合规报告。','对中国卖家：使用这些模型的 API 服务时，欧盟用户数据流转需注意 DPF（数据隐私框架）合规——大多数云厂商已默认在欧洲区域托管。'] },
+      { kind:'公司动态', title:'Stripe 收购 Agent 支付协议公司 Lithic', glyph:'box',
+        teaser:'Stripe 以 11 亿美元收购 Lithic，目标是给 Agent 发"专用虚拟卡"，每张卡有授权额度与场景限制。',
+        body:['Stripe 4 月 18 日宣布以 $1.1B 收购 Lithic：','• Lithic 提供"细粒度授权虚拟卡"——单卡限单商户、单类目、单次额度。','• 收购后的产品定位：让 Agent 拿一张"只能在这家供应商、只能买耗材、单次不超过 $500"的卡，限定爆雷半径。','信号：Agent 产业链在补"风险护栏"层。这是从 demo 到大规模部署的必经一步。','对跨境财务：未来一年内，给 Agent 配"专用支付权限"会是合规标配，类似今天的"分级 RBAC"。'] },
+    ],
+  },
+];
