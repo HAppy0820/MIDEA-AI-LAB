@@ -1,0 +1,67 @@
+name: Weekly Draft
+
+on:
+  schedule:
+    - cron: '0 14 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate weekly draft
+        id: gen
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          TZ: Asia/Shanghai
+        run: |
+          META=$(node scripts/weekly-draft.mjs)
+          echo "meta<<EOF" >> $GITHUB_OUTPUT
+          echo "$META" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          WEEK_ID=$(echo "$META" | node -e "let s='';process.stdin.on('data',c=>s+=c).on('end',()=>console.log(JSON.parse(s).weekId))")
+          echo "week_id=$WEEK_ID" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: weekly-draft-${{ steps.gen.outputs.week_id }}
+          delete-branch: true
+          commit-message: 'chore(weekly): ${{ steps.gen.outputs.week_id }} draft'
+          title: '[周草稿] ${{ steps.gen.outputs.week_id }} · 自动生成的本周大事件'
+          body: |
+            自动生成的本周 weekly 草稿。
+
+            **审核流程**
+            1. 浏览 `Files changed` 看 `data.js` 的 diff
+            2. 内容 OK → 点 **Merge** → Vercel 1–2 分钟内自动部署
+            3. 想改 → 直接在后台 `/admin/index.html` 编辑保存（会推到 main，本 PR 自动作废）
+            4. 不想发 → 点 **Close**，本周不更新
+          labels: |
+            weekly-draft
+            automated
+
+      - name: Send notification email
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          DRAFT_META: ${{ steps.gen.outputs.meta }}
+        run: node scripts/send-draft-email.mjs
